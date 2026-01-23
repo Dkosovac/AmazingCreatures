@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazing Creatures Kennel - Elite Poodles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --dark-black: #111;
+            --rich-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --accent-gold: #ffd700;
+            --text-light: #f8f9fa;
+            --text-gray: #aaa;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-black);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+        }
+        
+        .gold-text {
+            color: var(--rich-gold);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--rich-gold), transparent);
+        }
+        
+        /* Header & Navigation */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 1rem 0;
+            transition: all 0.4s ease;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background-color: rgba(10, 10, 10, 0.98);
+        }
+        
+        .navbar-brand {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--rich-gold) !important;
+            letter-spacing: 1px;
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--rich-gold) !important;
+        }
+        
+        .navbar-nav .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--rich-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.7)), url('https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--light-gold);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+        
+        .hero-divider {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--rich-gold), transparent);
+            margin: 2rem auto;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        .btn-gold {
+            background-color: var(--rich-gold);
+            color: var(--dark-black);
+            padding: 0.8rem 2rem;
+            border-radius: 0;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+        
+        .btn-gold:hover {
+            background-color: var(--accent-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 6rem 0;
+            background-color: var(--dark-black);
+            position: relative;
+        }
+        
+        .about-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('day.png') center/cover no-repeat;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .about-content {
+            padding: 2rem;
+            background-color: rgba(17, 17, 17, 0.8);
+            border-left: 3px solid var(--rich-gold);
+            transition: all 0.4s ease;
+        }
+        
+        .about-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Poodles Section */
+        .poodles-section {
+            padding: 6rem 0;
+            background-color: var(--primary-black);
+        }
+        
+        .poodle-card {
+            background-color: var(--dark-black);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s ease;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .poodle-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--rich-gold);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+        }
+        
+        .poodle-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .poodle-card:hover .poodle-img {
+            transform: scale(1.05);
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 6rem 0;
+            background-color: var(--dark-black);
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            height: 300px;
+            cursor: pointer;
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(212, 175, 55, 0.7));
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        /* Customers Section */
+        .customers-section {
+            padding: 6rem 0;
+            background-color: var(--primary-black);
+        }
+        
+        .customer-card {
+            background-color: var(--dark-black);
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            height: 100%;
+            transition: all 0.4s ease;
+        }
+        
+        .customer-card:hover {
+            border-color: var(--rich-gold);
+            transform: translateY(-5px);
+        }
+        
+        .customer-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--rich-gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-black);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .footer-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rich-gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+            margin: 2rem 0;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Gold Wave Effect */
+        .gold-wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('night.png') center/cover no-repeat;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-crown me-2"></i>AMAZING CREATURES
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#poodles">Poodles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#customers">Testimonials</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="gold-wave"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title gold-text">AMAZING CREATURES</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-subtitle">Elite Poodle Kennel • FCI 7364</p>
+            <p class="lead mb-4">Home to the finest pedigree poodles, bred with excellence, care, and passion for generations.</p>
+            <a href="#about" class="btn btn-gold">Discover Our World</a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title gold-text fade-in">About Our Kennel</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="about-content fade-in">
+                        <h3 class="mb-3 gold-text">A Legacy of Excellence</h3>
+                        <p>For over three decades, Amazing Creatures Kennel has been synonymous with excellence in breeding and raising premium poodles. Our commitment to health, temperament, and breed standards has made us a trusted name among discerning dog enthusiasts worldwide.</p>
+                        <p>Every poodle in our care receives individual attention, premium nutrition, and early socialization to ensure they become well-adjusted, intelligent companions.</p>
+                        <p>Our kennel is FCI registered (FCI 7364) and follows the highest ethical breeding practices. We specialize in Standard, Miniature, and Toy poodles in a variety of colors and coat types.</p>
+                        <div class="mt-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-award gold-text me-3"></i>
+                                <span>FCI Registered & Award-Winning Bloodlines</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-heartbeat gold-text me-3"></i>
+                                <span>Health Tested & Guaranteed</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-globe gold-text me-3"></i>
+                                <span>International Shipping Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="position-relative fade-in">
+                        <img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Poodle at our kennel" class="img-fluid rounded shadow">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 border border-3" style="border-color: var(--rich-gold) !important; transform: translate(20px, 20px); z-index: -1;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Poodles Section -->
+    <section id="poodles" class="poodles-section">
+        <div class="container">
+            <h2 class="section-title gold-text fade-in">Our Poodle Varieties</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="poodle-card">
+                        <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Standard Poodle" class="poodle-img">
+                        <div class="p-4">
+                            <h4 class="gold-text">Standard Poodle</h4>
+                            <p>The elegant and athletic Standard Poodle stands over 15 inches tall. Known for their intelligence and versatility, they excel in various dog sports and make wonderful family companions.</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-ruler-vertical me-1"></i> 15-24 inches</span>
+                                <span><i class="fas fa-weight me-1"></i> 45-70 lbs</span>
+                                <span class="gold-text">Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="poodle-card">
+                        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Miniature Poodle" class="poodle-img">
+                        <div class="p-4">
+                            <h4 class="gold-text">Miniature Poodle</h4>
+                            <p>Perfect for those who want a compact but active companion. Miniature Poodles stand 10-15 inches tall and possess all the intelligence and charm of their larger counterparts.</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-ruler-vertical me-1"></i> 10-15 inches</span>
+                                <span><i class="fas fa-weight me-1"></i> 15-17 lbs</span>
+                                <span class="gold-text">Limited</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="poodle-card">
+                        <img src="https://images.unsplash.com/photo-1534367507877-0edd93bd013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Toy Poodle" class="poodle-img">
+                        <div class="p-4">
+                            <h4 class="gold-text">Toy Poodle</h4>
+                            <p>The tiny but mighty Toy Poodle stands under 10 inches tall. Despite their small size, they are incredibly intelligent, agile, and make perfect companions for apartment living.</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-ruler-vertical me-1"></i> Under 10 inches</span>
+                                <span><i class="fas fa-weight me-1"></i> 6-9 lbs</span>
+                                <span class="gold-text">Reservations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title gold-text fade-in">Our Gallery</h2>
+            <p class="text-center mb-5 fade-in">A glimpse into the world of Amazing Creatures Kennel and our beloved poodles.</p>
+            <div class="row">
+                <div class="col-md-4 fade-in">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1559076722-4c6d4ec7d93d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Poodle Portrait" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Elegant Portrait</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Poodle Show" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Show Preparation</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 fade-in">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1548192746-dd526f154ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Poodle Playtime" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Playtime Fun</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customers Section -->
+    <section id="customers" class="customers-section">
+        <div class="container">
+            <h2 class="section-title gold-text fade-in">Satisfied Customers</h2>
+            <p class="text-center mb-5 fade-in">Hear from some of our delighted clients from around the world.</p>
+            <div class="row">
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="customer-card">
+                        <div class="text-center">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Customer" class="customer-img">
+                            <h5 class="gold-text">Sophia R.</h5>
+                            <p class="text-muted">Milan, Italy</p>
+                        </div>
+                        <p class="mt-3">"Our Toy Poodle from Amazing Creatures has brought so much joy to our family. The health guarantee and ongoing support have been exceptional. Bella is perfection!"</p>
+                        <div class="mt-3">
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="customer-card">
+                        <div class="text-center">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="customer-img">
+                            <h5 class="gold-text">Markus S.</h5>
+                            <p class="text-muted">Vienna, Austria</p>
+                        </div>
+                        <p class="mt-3">"As a breeder myself, I appreciate the exceptional standards at Amazing Creatures. Our new Standard Poodle has impeccable lineage and temperament. Highly recommended!"</p>
+                        <div class="mt-3">
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="customer-card">
+                        <div class="text-center">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="customer-img">
+                            <h5 class="gold-text">Isabella D.</h5>
+                            <p class="text-muted">Sicily, Italy</p>
+                        </div>
+                        <p class="mt-3">"Our Miniature Poodle from Amazing Creatures arrived healthy, happy, and perfectly socialized. The team provided excellent guidance throughout the adoption process."</p>
+                        <div class="mt-3">
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                            <i class="fas fa-star gold-text"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo">
+                        <i class="fas fa-crown me-2"></i>AMAZING CREATURES
+                    </div>
+                    <p>Elite Poodle Kennel specializing in Standard, Miniature, and Toy Poodles of exceptional quality and temperament.</p>
+                    <p class="gold-text">FCI Registration: 7364</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="gold-text mb-3">Contact Information</h5>
+                    <div class="mb-2">
+                        <i class="fas fa-map-marker-alt gold-text me-2"></i>
+                        <span>123 Elite Avenue, Prestige District</span>
+                    </div>
+                    <div class="mb-2">
+                        <i class="fas fa-phone gold-text me-2"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="mb-2">
+                        <i class="fas fa-envelope gold-text me-2"></i>
+                        <span>info@amazingcreatureskennel.com</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="gold-text mb-3">Follow Us</h5>
+                    <div class="d-flex">
+                        <a href="#" class="me-3 social-icon">
+                            <i class="fab fa-instagram fa-2x text-light"></i>
+                        </a>
+                        <a href="#" class="me-3 social-icon">
+                            <i class="fab fa-facebook fa-2x text-light"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-pinterest fa-2x text-light"></i>
+                        </a>
+                    </div>
+                    <p class="mt-3 small text-muted">© 2023 Amazing Creatures Kennel. All rights reserved.</p>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="text-center text-muted small">
+                <p>Breeding excellence since 1990. All our poodles are health tested, socialized, and come with full documentation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = function() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        // Initial check
+        fadeInOnScroll();
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add gold particle effect on hover for gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                const overlay = this.querySelector('.gallery-overlay');
+                overlay.style.background = 'linear-gradient(transparent, rgba(212, 175, 55, 0.8))';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                const overlay = this.querySelector('.gallery-overlay');
+                overlay.style.background = 'linear-gradient(transparent, rgba(212, 175, 55, 0.7))';
+            });
+        });
+    </script>
+</body>
+</html>
