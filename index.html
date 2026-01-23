@@ -41,31 +41,7 @@
             </div>
         </div>
     </nav>
-,<script>
-    // Aktivan link u navigaciji
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('section');
 
-window.addEventListener('scroll', function() {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (scrollY >= (sectionTop - 150)) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-            link.classList.add('active');
-        }
-    });
-});
-</script>
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="gold-wave"></div>
@@ -81,7 +57,7 @@ window.addEventListener('scroll', function() {
     <!-- About Us Section -->
     <section id="about" class="about-section">
         <div class="container">
-            <h2 class="section-title gold-text fade-in">O nama</h2>
+            <h2 class="section-title gold-text fade-in"></h2>
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <div class="about-content fade-in">
@@ -309,6 +285,288 @@ window.addEventListener('scroll', function() {
                 overlay.style.background = 'linear-gradient(transparent, rgba(212, 175, 55, 0.7))';
             });
         });
+        // ===== POCETNA ANIMACIJA =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. PAGE FADE IN
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 1s ease-out';
+    
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+
+    // 2. NAVBAR SLIDE DOWN
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        navbar.style.transform = 'translateY(-100%)';
+        navbar.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        
+        setTimeout(() => {
+            navbar.style.transform = 'translateY(0)';
+        }, 300);
+    }
+
+    // 3. HERO TITLE ANIMATION
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        const text = heroTitle.textContent;
+        heroTitle.innerHTML = '';
+        
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.display = 'inline-block';
+            span.style.opacity = '0';
+            span.style.transform = 'translateY(30px)';
+            span.style.animation = `letterDrop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards ${index * 0.05}s`;
+            heroTitle.appendChild(span);
+        });
+    }
+
+    // 4. HERO ELEMENTS STAGGER
+    const heroElements = document.querySelectorAll('.hero-subtitle, .hero-divider, .btn-gold');
+    heroElements.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.animation = `fadeUp 0.6s ease-out forwards ${0.8 + (index * 0.2)}s`;
+    });
+
+    // 5. GOLD WAVE ANIMATION
+    const goldWave = document.createElement('div');
+    goldWave.className = 'gold-wave-animated';
+    goldWave.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(212, 175, 55, 0.1),
+            rgba(212, 175, 55, 0.15),
+            rgba(212, 175, 55, 0.1),
+            transparent
+        );
+        pointer-events: none;
+        z-index: 1;
+        transform: translateX(-100%);
+        animation: waveFlow 2s ease-out;
+    `;
+    
+    document.querySelector('.hero-section')?.appendChild(goldWave);
+
+    // 6. ADD CSS ANIMATIONS
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes letterDrop {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes waveFlow {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        /* Floating animation for cards */
+        .poodle-card, .customer-card {
+            animation: floatCard 6s ease-in-out infinite;
+        }
+        
+        @keyframes floatCard {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        /* Gold hover effect */
+        .btn-gold {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-gold:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+        }
+        
+        .btn-gold:hover:before {
+            left: 100%;
+        }
+    `;
+    
+    document.head.appendChild(style);
+
+    // 7. REMOVE ANIMATION STYLES AFTER COMPLETION
+    setTimeout(() => {
+        heroElements.forEach(el => {
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.animation = '';
+        });
+        
+        // Remove gold wave after animation
+        setTimeout(() => {
+            goldWave.remove();
+        }, 2000);
+    }, 2000);
+
+    // 8. SCROLL INDICATOR ANIMATION
+    const scrollIndicator = document.createElement('div');
+    scrollIndicator.style.cssText = `
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 50px;
+        border: 2px solid var(--rich-gold);
+        border-radius: 15px;
+        opacity: 0;
+        animation: fadeInScroll 1s ease-out 2s forwards;
+    `;
+    
+    const scrollDot = document.createElement('div');
+    scrollDot.style.cssText = `
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background: var(--rich-gold);
+        border-radius: 50%;
+        animation: scrollBounce 2s infinite 2.5s;
+    `;
+    
+    scrollIndicator.appendChild(scrollDot);
+    document.querySelector('.hero-section')?.appendChild(scrollIndicator);
+
+    // Add scroll indicator animations
+    const scrollStyle = document.createElement('style');
+    scrollStyle.textContent = `
+        @keyframes fadeInScroll {
+            to { opacity: 0.7; }
+        }
+        
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-50%) translateY(20px);
+                opacity: 0.5;
+            }
+        }
+    `;
+    document.head.appendChild(scrollStyle);
+
+    // Remove scroll indicator on scroll
+    window.addEventListener('scroll', function removeIndicator() {
+        if (window.scrollY > 100) {
+            scrollIndicator.style.opacity = '0';
+            scrollIndicator.style.transition = 'opacity 0.5s';
+            setTimeout(() => scrollIndicator.remove(), 500);
+            window.removeEventListener('scroll', removeIndicator);
+        }
+    });
+});
+
+// ===== NAVBAR SCROLL EFFECT =====
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+});
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+// Dodaj na kraj scripta
+const backToTop = document.createElement('button');
+backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
+backToTop.className = 'back-to-top';
+backToTop.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--rich-gold);
+    border: none;
+    border-radius: 50%;
+    color: var(--dark-black);
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+`;
+
+document.body.appendChild(backToTop);
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+        backToTop.style.opacity = '1';
+        backToTop.style.transform = 'translateY(0)';
+    } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.transform = 'translateY(20px)';
+    }
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
     </script>
 </body>
 </html>
