@@ -14,7 +14,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.html">
                 <i class="fas fa-crown me-2"></i>AMAZING CREATURES
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -41,14 +41,38 @@
             </div>
         </div>
     </nav>
+,<script>
+    // Aktivan link u navigaciji
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section');
 
+window.addEventListener('scroll', function() {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (scrollY >= (sectionTop - 150)) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+        }
+    });
+});
+</script>
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="gold-wave"></div>
         <div class="container hero-content">
             <h1 class="hero-title gold-text">AMAZING CREATURES</h1>
             <div class="hero-divider"></div>
-            <p class="hero-subtitle">Elite Poodle Kennel • FCI 7364</p>
+            <p class="hero-subtitle">FCI 7364</p>
             <p class="lead mb-4">Home to the finest pedigree poodles, bred with excellence, care, and passion for generations.</p>
             <a href="#about" class="btn btn-gold">Discover Our World</a>
         </div>
@@ -57,7 +81,7 @@
     <!-- About Us Section -->
     <section id="about" class="about-section">
         <div class="container">
-            <h2 class="section-title gold-text fade-in">About Our Kennel</h2>
+            <h2 class="section-title gold-text fade-in">O nama</h2>
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <div class="about-content fade-in">
@@ -83,7 +107,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="position-relative fade-in">
-                        <img src="https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Poodle at our kennel" class="img-fluid rounded shadow">
+                        <img src="assets/gallery/banner.jpg" alt="Poodle at our kennel" class="img-fluid rounded shadow">
                         <div class="position-absolute top-0 start-0 w-100 h-100 border border-3" style="border-color: var(--rich-gold) !important; transform: translate(20px, 20px); z-index: -1;"></div>
                     </div>
                 </div>
@@ -94,13 +118,13 @@
     <!-- Poodles Section -->
     <section id="poodles" class="poodles-section">
         <div class="container">
-            <h2 class="section-title gold-text fade-in">Our Poodle Varieties</h2>
+            <h2 class="section-title gold-text fade-in">O pudlama</h2>
             <div class="row">
                 <div class="col-md-4 mb-4 fade-in">
                     <div class="poodle-card">
-                        <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Standard Poodle" class="poodle-img">
+                        <img src="assets/gallery/pudla3.jpg" alt="Standard Poodle" class="poodle-img">
                         <div class="p-4">
-                            <h4 class="gold-text">Standard Poodle</h4>
+                            <h4 class="gold-text">Inteligencija</h4>
                             <p>The elegant and athletic Standard Poodle stands over 15 inches tall. Known for their intelligence and versatility, they excel in various dog sports and make wonderful family companions.</p>
                             <div class="d-flex justify-content-between mt-3">
                                 <span><i class="fas fa-ruler-vertical me-1"></i> 15-24 inches</span>
@@ -112,7 +136,7 @@
                 </div>
                 <div class="col-md-4 mb-4 fade-in">
                     <div class="poodle-card">
-                        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Miniature Poodle" class="poodle-img">
+                        <img src="assets/gallery/stenci2.jpg" alt="Miniature Poodle" class="poodle-img">
                         <div class="p-4">
                             <h4 class="gold-text">Miniature Poodle</h4>
                             <p>Perfect for those who want a compact but active companion. Miniature Poodles stand 10-15 inches tall and possess all the intelligence and charm of their larger counterparts.</p>
@@ -126,7 +150,7 @@
                 </div>
                 <div class="col-md-4 mb-4 fade-in">
                     <div class="poodle-card">
-                        <img src="https://images.unsplash.com/photo-1534367507877-0edd93bd013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Toy Poodle" class="poodle-img">
+                        <img src="assets/gallery/stenci1.jpg" alt="Toy Poodle" class="poodle-img">
                         <div class="p-4">
                             <h4 class="gold-text">Toy Poodle</h4>
                             <p>The tiny but mighty Toy Poodle stands under 10 inches tall. Despite their small size, they are incredibly intelligent, agile, and make perfect companions for apartment living.</p>
@@ -150,7 +174,7 @@
             <div class="row">
                 <div class="col-md-4 fade-in">
                     <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1559076722-4c6d4ec7d93d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Poodle Portrait" class="gallery-img">
+                        <img src="assets/kupac3.jpg" alt="Poodle Portrait" class="gallery-img">
                         <div class="gallery-overlay">
                             <h5 class="gold-text">Elegant Portrait</h5>
                         </div>
@@ -158,7 +182,7 @@
                 </div>
                 <div class="col-md-4 fade-in">
                     <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Poodle Show" class="gallery-img">
+                        <img src="assets/kupac2.jpg" alt="Poodle Show" class="gallery-img">
                         <div class="gallery-overlay">
                             <h5 class="gold-text">Show Preparation</h5>
                         </div>
@@ -166,70 +190,9 @@
                 </div>
                 <div class="col-md-4 fade-in">
                     <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1548192746-dd526f154ed9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Poodle Playtime" class="gallery-img">
+                        <img src="assets/kupac6.jpg" alt="Poodle Playtime" class="gallery-img">
                         <div class="gallery-overlay">
                             <h5 class="gold-text">Playtime Fun</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Customers Section -->
-    <section id="customers" class="customers-section">
-        <div class="container">
-            <h2 class="section-title gold-text fade-in">Satisfied Customers</h2>
-            <p class="text-center mb-5 fade-in">Hear from some of our delighted clients from around the world.</p>
-            <div class="row">
-                <div class="col-md-4 mb-4 fade-in">
-                    <div class="customer-card">
-                        <div class="text-center">
-                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Customer" class="customer-img">
-                            <h5 class="gold-text">Sophia R.</h5>
-                            <p class="text-muted">Milan, Italy</p>
-                        </div>
-                        <p class="mt-3">"Our Toy Poodle from Amazing Creatures has brought so much joy to our family. The health guarantee and ongoing support have been exceptional. Bella is perfection!"</p>
-                        <div class="mt-3">
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 fade-in">
-                    <div class="customer-card">
-                        <div class="text-center">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="customer-img">
-                            <h5 class="gold-text">Markus S.</h5>
-                            <p class="text-muted">Vienna, Austria</p>
-                        </div>
-                        <p class="mt-3">"As a breeder myself, I appreciate the exceptional standards at Amazing Creatures. Our new Standard Poodle has impeccable lineage and temperament. Highly recommended!"</p>
-                        <div class="mt-3">
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 fade-in">
-                    <div class="customer-card">
-                        <div class="text-center">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="customer-img">
-                            <h5 class="gold-text">Isabella D.</h5>
-                            <p class="text-muted">Sicily, Italy</p>
-                        </div>
-                        <p class="mt-3">"Our Miniature Poodle from Amazing Creatures arrived healthy, happy, and perfectly socialized. The team provided excellent guidance throughout the adoption process."</p>
-                        <div class="mt-3">
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
-                            <i class="fas fa-star gold-text"></i>
                         </div>
                     </div>
                 </div>
