@@ -4,45 +4,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazing Creatures - Elite Poodles</title>
+    <title>Amazing Creatures | Elitna Odgajivačnica Pudli FCI 7364</title>
+    <meta name="description"
+        content="Dom najkvalitetnijih rodovničkih pudli u Srbiji. FCI 7364 - Zdravlje, karakter i genetika bez kompromisa.">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://amazing-creatures.com/">
+    <meta property="og:title" content="Amazing Creatures Kennel - Elitne Pudle">
+    <meta property="og:description" content="Otkrijte naš svet šampionskih pudli odgajanih sa ljubavlju.">
+    <meta property="og:image" content="assets/gallery/og-image.jpg"> <!-- Napravi sliku 1200x630 -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Amazing Creatures Kennel">
     <link href="custom/main.scss" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap"
         rel="stylesheet">
+
+
+    <style>
+        /* 1. OSNOVNE BOJE I VARIJABLE */
+        :root {
+            --rich-gold: #d4af37;
+            --dark-black: #0a0a0a;
+            --text-white: #ffffff;
+            --gold-gradient: linear-gradient(90deg, #d4af37, #f4e4a6, #d4af37);
+        }
+
+        .hero-section {
+            background-attachment: fixed;
+            /* Najjednostavniji način za parallax */
+        }
+
+        /* 2. SITE HEADER (SADA ODLAZI PRI SKROLU) */
+        .site-header {
+            position: absolute !important;
+            /* Promenjeno sa fixed na absolute da bi se skrolovalo */
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+        }
+
+
+        .btn-gold {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::after {
+            content: '';
+            position: absolute;
+            top: -80%;
+            left: -80%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(30deg);
+            transition: none;
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -60%;
+            }
+
+            20% {
+                left: 120%;
+            }
+
+            100% {
+                left: 120%;
+            }
+        }
+
+        /* 3. LOGO */
+        .logo img {
+            height: 100px;
+            width: auto;
+            transition: transform 0.3s ease;
+            filter: brightness(1.1);
+        }
+
+        /* 4. DESNA STRANA (MENU BUTTON) */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-text {
+            color: var(--text-white);
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ZLATNO DUGME KOJE SI TRAŽIO */
+        .menu-toggle {
+            background: transparent;
+            border: 1px solid var(--rich-gold);
+            padding: 12px 10px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background: var(--rich-gold);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        /* 5. NAV OVERLAY (MENI KOJI SE OTVARA) */
+        .nav-overlay {
+            position: fixed !important;
+            /* Overlay mora ostati fixed da pokrije ceo ekran */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            z-index: 1001;
+            /* Iznad headera */
+            display: none;
+            /* Inicijalno sakriven */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Bootstrap klasa koja se aktivira na klik */
+        .nav-overlay.show {
+            display: flex !important;
+        }
+
+        .nav-overlay ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .nav-overlay li {
+            margin: 25px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        .nav-overlay a {
+            color: var(--text-white);
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            text-decoration: none;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-overlay a:hover {
+            color: var(--rich-gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        /* 6. HERO SEKCIJA */
+        .hero-section {
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                url('assets/gallery/banner.jpg') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 7. DODACI (DUGMAD I TEKST) */
+        .gold-text {
+            color: var(--rich-gold);
+        }
+
+        .btn-gold {
+            background: var(--rich-gold);
+            color: var(--dark-black);
+            padding: 12px 35px;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn-gold:hover {
+            background: #f4e4a6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* BACK TO TOP */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--rich-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            text-decoration: none;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        /* ANIMACIJA */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .logo img {
+                height: 50px;
+            }
+
+            .menu-text {
+                display: none;
+            }
+
+            .nav-overlay a {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Kontejner za sliku da bi pečat mogao da se pozicionira */
+        .about-image-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .fci-stamp {
+            position: absolute;
+            bottom: -80px;
+            /* Pomera pečat malo van slike (kao na luksuznim katalozima) */
+            right: -80px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4e4a6 50%, #b8860b 100%);
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, 0.5),
+                inset 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: rotate(-15deg);
+            /* Blago nagnut za prirodniji izgled */
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .fci-stamp:hover {
+            transform: rotate(0deg) scale(1.1);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .stamp-inner {
+            width: 100%;
+            height: 100%;
+            border: 2px dashed rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .stamp-fci {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 22px;
+            color: rgba(0, 0, 0, 0.7);
+            line-height: 1;
+            text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.2);
+        }
+
+        .stamp-no {
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 2px;
+        }
+
+        .stamp-text {
+            font-size: 7px;
+            font-weight: 800;
+            color: rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Dodajemo sjaj koji prolazi preko pečata */
+        .fci-stamp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right,
+                    transparent,
+                    rgba(255, 255, 255, 0.4),
+                    transparent);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+        }
+
+        .fci-stamp:hover::before {
+            left: 150%;
+            transition: 0.8s;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-crown me-2"></i>AMAZING CREATURES
+    <header class="site-header">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+                <img src="assets/gallery/izlaz.png" alt="Kalapoš">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Pocetna</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">O nama</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#poodles">O pudlama</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#gallery">Galerija</a>
-                    </li>
-                </ul>
-            </div>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
+        <div class="nav-right">
+            <button class="menu-toggle" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="collapse nav-overlay" id="navMenu">
+        <ul>
+            <li><a href="#home">Početna</a></li>
+            <li><a href="#about">O nama</a></li>
+            <li><a href="#poodles">O pudlama</a></li>
+            <li><a href="#gallery">Galerija</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section (OSTAJE NE PROMENJENO) -->
     <section id="home" class="hero-section">
         <div class="gold-wave"></div>
         <div class="container hero-content">
@@ -52,7 +400,6 @@
             <p class="lead mb-4">
                 Dom najkvalitetnijih rodovničkih pudli, odgajanih sa izvrsnošću, pažnjom i strašću kroz generacije.</p>
             <a href="#about" class="btn btn-gold">Otkrijte naš svet</a>
-
         </div>
     </section>
 
@@ -63,24 +410,17 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <div class="about-content fade-in">
-                        <h3 class="mb-3 gold-text">Nasleđe izvrsnosti</h3>
+                        <h3 class="mb-3 gold-text">O nama</h3>
 
                         <p>
-                            Više od tri decenije, odgajivačnica Amazing Creatures  predstavlja sinonim za vrhunski
-                            kvalitet u odgoju i uzgoju pudli. Naša posvećenost zdravlju, stabilnom temperamentu i
-                            poštovanju standarda rase učinila nas je pouzdanim imenom među istinskim ljubiteljima pasa
-                            širom sveta.
-                        </p>
-
-                        <p>
-                            Svaka pudla u našem odgoju dobija individualnu pažnju, vrhunsku ishranu i ranu
-                            socijalizaciju, kako bi izrasla u uravnoteženog, inteligentnog i privrženog saputnika.
-                        </p>
-
-                        <p>
-                            Naša odgajivačnica je registrovana pri FCI-ju (FCI 7364) i posluje u skladu sa najvišim
-                            etičkim principima uzgoja. Specijalizovani smo za standardne, patuljaste i toy pudle, u
-                            različitim bojama i tipovima dlake.
+                            Odgajivačnica pudli Amazing Creatures sa sedištem u Kruševcu, Srbija, koju vodi Marko
+                            Popović. Već 7 godina posvećeni smo uzgajanju zdravih, pametnih i prijateljski nastrojenih
+                            pudli, sa ciljem da svako štene postane pravi član porodice svojih budućih vlasnika.
+                            Za ovih sedam godina, naši psi su pronašli dom kod stotina zadovoljnih kupaca, a mi se
+                            trudimo da svaka porodica dobije ne samo psa, već i podršku i savete za njegovo pravilno
+                            odgajanje i negu, a to nas čini drugačijim od ostalih. Naša strast je stvaranje srećnih,
+                            socijalizovanih i razigranih pudli, spremnih da unesu radost u svaki dom.
+                            U Amazing Creatures, zdravlje, karakter i genetika su nam najvažniji.
                         </p>
 
                         <div class="mt-4">
@@ -102,8 +442,18 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
+                    <div class="about-image-wrapper">
+                        <!-- ZLATNI PEČAT -->
+                        <div class="fci-stamp">
+                            <div class="stamp-inner">
+                                <span class="stamp-fci">FCI</span>
+                                <span class="stamp-no">7364</span>
+                                <div class="stamp-text">REGISTERED KENNEL</div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="position-relative fade-in">
-                        <img src="assets/logo.png" alt="Poodle at our kennel"
+                        <img src="assets/gallery/banner.jpg" alt="Poodle at our kennel"
                             class="img-fluid rounded shadow">
                         <div class="position-absolute top-0 start-0 w-100 h-100 border border-3"
                             style="border-color: var(--rich-gold) !important; transform: translate(20px, 20px); z-index: -1;">
@@ -116,355 +466,301 @@
 
     <!-- Poodles Section -->
     <section id="poodles" class="poodles-section">
-    <div class="container">
-        <h2 class="section-title gold-text fade-in">O pudlama</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4 fade-in">
-                <div class="poodle-card">
-                    <img src="assets/gallery/pudla3.jpg" alt="Standardna pudla" class="poodle-img">
-                    <div class="p-4">
-                        <h4 class="gold-text">Inteligencija</h4>
-                        <p>
-                            Elegantna i atletski građena standardna pudla dostiže visinu veću od 15 inča.
-                            Poznata po svojoj inteligenciji i svestranosti, ističe se u raznim psećim sportovima
-                            i predstavlja divnog porodičnog psa.
-                        </p>
-                        <div class="d-flex justify-content-between mt-3">
-                            <span><i class="fas fa-ruler-vertical me-1"></i> 15–24 inča</span>
-                            <span><i class="fas fa-weight me-1"></i> 45–70 funti</span>
-                            <span class="gold-text">Dostupno</span>
+        <div class="container">
+            <h2 class="section-title gold-text fade-in">O pudlama</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="poodle-card">
+                        <img src="assets/gallery/pudla3.jpg" alt="Standardna pudla" class="poodle-img">
+                        <div class="p-4">
+                            <h4 class="gold-text">Inteligencija</h4>
+                            <p>
+                                Elegantna i atletski građena standardna pudla dostiže visinu veću od 15 inča.
+                                Poznata po svojoj inteligenciji i svestranosti, ističe se u raznim psećim sportovima
+                                i predstavlja divnog porodičnog psa.
+                            </p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-ruler-vertical me-1"></i> 15–24 inča</span>
+                                <span><i class="fas fa-weight me-1"></i> 45–70 funti</span>
+                                <span class="gold-text">Dostupno</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-4 fade-in">
-                <div class="poodle-card">
-                    <img src="assets/gallery/stenci2.jpg" alt="Patuljasta pudla" class="poodle-img">
-                    <div class="p-4">
-                        <h4 class="gold-text">Mini pudla</h4>
-                        <p>
-                            Savršena za one koji žele kompaktno, ali aktivno društvo.
-                            Mini pudle dostižu visinu od 10 do 15 inča i poseduju svu inteligenciju
-                            i šarm svojih većih srodnika.
-                        </p>
-                        <div class="d-flex justify-content-between mt-3">
-                            <span><i class="fas fa-ruler-vertical me-1"></i> 10–15 inča</span>
-                            <span><i class="fas fa-weight me-1"></i> 15–17 funti</span>
-                            <span class="gold-text">Ograničeno</span>
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="poodle-card">
+                        <img src="assets/gallery/stenci2.jpg" alt="Patuljasta pudla" class="poodle-img">
+                        <div class="p-4">
+                            <h4 class="gold-text">Mini pudla</h4>
+                            <p>
+                                Savršena za one koji žele kompaktno, ali aktivno društvo.
+                                Mini pudle dostižu visinu od 10 do 15 inča i poseduju svu inteligenciju
+                                i šarm svojih većih srodnika.
+                            </p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-ruler-vertical me-1"></i> 10–15 inča</span>
+                                <span><i class="fas fa-weight me-1"></i> 15–17 funti</span>
+                                <span class="gold-text">Ograničeno</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-4 fade-in">
-                <div class="poodle-card">
-                    <img src="assets/gallery/stenci1.jpg" alt="Toy pudla" class="poodle-img">
-                    <div class="p-4">
-                        <h4 class="gold-text">Toy pudla</h4>
-                        <p>
-                            Mala, ali snažna, toy pudla dostiže visinu ispod 10 inča.
-                            Uprkos svojoj veličini, izuzetno je inteligentna, okretna
-                            i savršeno se uklapa u život u stanu.
-                        </p>
-                        <div class="d-flex justify-content-between mt-3">
-                            <span><i class="fas fa-ruler-vertical me-1"></i> Ispod 10 inča</span>
-                            <span><i class="fas fa-weight me-1"></i> 6–9 funti</span>
-                            <span class="gold-text">Rezervacije</span>
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="poodle-card">
+                        <img src="assets/gallery/stenci1.jpg" alt="Toy pudla" class="poodle-img">
+                        <div class="p-4">
+                            <h4 class="gold-text">Toy pudla</h4>
+                            <p>
+                                Mala, ali snažna, toy pudla dostiže visinu ispod 10 inča.
+                                Uprkos svojoj veličini, izuzetno je inteligentna, okretna
+                                i savršeno se uklapa u život u stanu.
+                            </p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-ruler-vertical me-1"></i> Ispod 10 inča</span>
+                                <span><i class="fas fa-weight me-1"></i> 6–9 funti</span>
+                                <span class="gold-text">Rezervacije</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-    </div>
-</section>
-
-  <section id="gallery" class="gallery-section">
-    <div class="container">
-        <h2 class="section-title gold-text fade-in">Naša galerija</h2>
-        <p class="text-center mb-5 fade-in">
-            Kratak pogled u svet odgajivačnice Amazing Creatures i naših zadovoljnih kupaca.
-        </p>
-        <div class="row">
-            <!-- Slika 1 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/kupac1.jpg" alt="Pudla u prirodi" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Šetnja u prirodi</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 2 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/kupac2.jpg" alt="Pudla na izložbi" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Priprema za izložbu</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 3 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/kupac3.jpg" alt="Portret pudle" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Elegantni portret</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 4 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/kupac4.jpg" alt="Pudla sa vlasnikom" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Verni prijatelj</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 5 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/kupac5.jpg" alt="Štenad pudle" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Novo pokoljenje</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 6 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/kupac6.jpg" alt="Igra pudle" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Radost igre</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 7 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/kupac7.jpg" alt="Nagrade i trofeji" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Naši uspesi</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 8 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/kupac8.jpg" alt="Pudla u stanu" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Udomljena sreća</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 9 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/gallery/banner.jpg" alt="Pudla na treningu" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Trening i disciplina</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 10 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/gallery/g2.jpg" alt="Porodična slika" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Porodično zadovoljstvo</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 11 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/gallery/g3.jpg" alt="Pudla na plaži" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Letnje avanture</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 12 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/gallery/g4.jpg" alt="Odgajivačnica Amazing Creatures" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Naš dom</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 13 (dodatna) -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/gallery/g5.jpg" alt="Pudla sa decom" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Dečji drugar</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 14 (dodatna) -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/gallery/g6.jpg" alt="Pudla u snegu" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Zimske radosti</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 15 (dodatna) -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/gallery/stenci1.jpg" alt="Pudla u kafiću" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Društveni život</h5>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slika 16 (dodatna) -->
-            <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
-                <div class="gallery-item">
-                    <img src="assets/gallery/stenci2.jpg" alt="Pudla spava" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h5 class="gold-text">Mirmo odmorište</h5>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title gold-text fade-in">Naša galerija</h2>
+            <p class="text-center mb-5 fade-in">
+                Kratak pogled u svet odgajivačnice Amazing Creatures i naših zadovoljnih kupaca.
+            </p>
+            <div class="row">
+                <!-- Slika 1 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/kupac1.jpg" alt="Pudla u prirodi" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Šetnja u prirodi</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 2 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/kupac2.jpg" alt="Pudla na izložbi" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Priprema za izložbu</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 3 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/kupac3.jpg" alt="Portret pudle" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Elegantni portret</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 4 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/kupac4.jpg" alt="Pudla sa vlasnikom" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Verni prijatelj</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 5 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/kupac5.jpg" alt="Štenad pudle" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Novo pokoljenje</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 6 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/kupac6.jpg" alt="Igra pudle" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Radost igre</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 7 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/kupac7.jpg" alt="Nagrade i trofeji" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Naši uspesi</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 8 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/kupac8.jpg" alt="Pudla u stanu" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Udomljena sreća</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 9 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/gallery/banner.jpg" alt="Pudla na treningu" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Trening i disciplina</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 10 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/gallery/g2.jpg" alt="Porodična slika" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Porodično zadovoljstvo</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 11 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/gallery/g3.jpg" alt="Pudla na plaži" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Letnje avanture</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 12 -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/gallery/g4.jpg" alt="Odgajivačnica Amazing Creatures" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Naš dom</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 13 (dodatna) -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/gallery/g5.jpg" alt="Pudla sa decom" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Dečji drugar</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 14 (dodatna) -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/gallery/g6.jpg" alt="Pudla u snegu" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Zimske radosti</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 15 (dodatna) -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/gallery/stenci1.jpg" alt="Pudla u kafiću" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Društveni život</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slika 16 (dodatna) -->
+                <div class="col-lg-3 col-md-4 col-sm-6 fade-in">
+                    <div class="gallery-item">
+                        <img src="assets/gallery/stenci2.jpg" alt="Pudla spava" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h5 class="gold-text">Mirmo odmorište</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <div class="footer-logo">
-                    <i class="fas fa-crown me-2"></i>AMAZING CREATURES
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo">
+                        <i class="fas fa-crown me-2"></i>AMAZING CREATURES
+                    </div>
+                    <p>
+                        Elitna odgajivačnica pudli, specijalizovana za standardne, patuljaste i toy pudle
+                        izuzetnog kvaliteta i stabilnog temperamenta.
+                    </p>
+                    <p class="gold-text">FCI registracija: 7364</p>
                 </div>
+
+                <div class="col-lg-4 mb-4">
+                    <h5 class="gold-text mb-3">Kontakt informacije</h5>
+                    <div class="mb-2">
+                        <i class="fas fa-map-marker-alt gold-text me-2"></i>
+                        <span>Adresa</span>
+                    </div>
+                    <div class="mb-2">
+                        <i class="fas fa-phone gold-text me-2"></i>
+                        <span>Telefon</span>
+                    </div>
+                    <div class="mb-2">
+                        <i class="fas fa-envelope gold-text me-2"></i>
+                        <span>Email</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <h5 class="gold-text mb-3">Pratite nas</h5>
+                    <div class="d-flex">
+                        <a href="https://www.instagram.com/amazingcreatures_poodlekennel/" class="me-3 social-icon">
+                            <i class="fab fa-instagram fa-2x text-light"></i>
+                        </a>
+                    </div>
+                    <p class="mt-3 small text-muted">
+                        © 2026 Amazing Creatures Kennel. Sva prava zadržana.
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="text-center text-muted small">
                 <p>
-                    Elitna odgajivačnica pudli, specijalizovana za standardne, patuljaste i toy pudle
-                    izuzetnog kvaliteta i stabilnog temperamenta.
-                </p>
-                <p class="gold-text">FCI registracija: 7364</p>
-            </div>
-
-            <div class="col-lg-4 mb-4">
-                <h5 class="gold-text mb-3">Kontakt informacije</h5>
-                <div class="mb-2">
-                    <i class="fas fa-map-marker-alt gold-text me-2"></i>
-                    <span>Adresa</span>
-                </div>
-                <div class="mb-2">
-                    <i class="fas fa-phone gold-text me-2"></i>
-                    <span>Telefon</span>
-                </div>
-                <div class="mb-2">
-                    <i class="fas fa-envelope gold-text me-2"></i>
-                    <span>Email</span>
-                </div>
-            </div>
-
-            <div class="col-lg-4 mb-4">
-                <h5 class="gold-text mb-3">Pratite nas</h5>
-                <div class="d-flex">
-                    <a href="#" class="me-3 social-icon">
-                        <i class="fab fa-instagram fa-2x text-light"></i>
-                    </a>
-                </div>
-                <p class="mt-3 small text-muted">
-                    © 2026 Amazing Creatures Kennel. Sva prava zadržana.
+                    Izvrsnost u uzgoju od 2017. godine. Sve naše pudle su zdravstveno testirane,
+                    socijalizovane i dolaze sa potpunom dokumentacijom.
                 </p>
             </div>
         </div>
+    </footer>
 
-        <div class="footer-divider"></div>
-
-        <div class="text-center text-muted small">
-            <p>
-                Izvrsnost u uzgoju od 2017. godine. Sve naše pudle su zdravstveno testirane,
-                socijalizovane i dolaze sa potpunom dokumentacijom.
-            </p>
-        </div>
-    </div>
-</footer>
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Fade-in animation on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-
-        const fadeInOnScroll = function () {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', fadeInOnScroll);
-        // Initial check
-        fadeInOnScroll();
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Add gold particle effect on hover for gallery items
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('mouseenter', function () {
-                const overlay = this.querySelector('.gallery-overlay');
-                overlay.style.background = 'linear-gradient(transparent, rgba(212, 175, 55, 0.8))';
-            });
-
-            item.addEventListener('mouseleave', function () {
-                const overlay = this.querySelector('.gallery-overlay');
-                overlay.style.background = 'linear-gradient(transparent, rgba(212, 175, 55, 0.7))';
-            });
-        });
         // ===== POCETNA ANIMACIJA =====
         document.addEventListener('DOMContentLoaded', function () {
             // 1. PAGE FADE IN
@@ -476,7 +772,7 @@
             }, 100);
 
             // 2. NAVBAR SLIDE DOWN
-            const navbar = document.querySelector('.navbar');
+            const navbar = document.querySelector('.site-header');
             if (navbar) {
                 navbar.style.transform = 'translateY(-100%)';
                 navbar.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
@@ -515,93 +811,93 @@
             const goldWave = document.createElement('div');
             goldWave.className = 'gold-wave-animated';
             goldWave.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(212, 175, 55, 0.1),
-            rgba(212, 175, 55, 0.15),
-            rgba(212, 175, 55, 0.1),
-            transparent
-        );
-        pointer-events: none;
-        z-index: 1;
-        transform: translateX(-100%);
-        animation: waveFlow 2s ease-out;
-    `;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(212, 175, 55, 0.1),
+                    rgba(212, 175, 55, 0.15),
+                    rgba(212, 175, 55, 0.1),
+                    transparent
+                );
+                pointer-events: none;
+                z-index: 1;
+                transform: translateX(-100%);
+                animation: waveFlow 2s ease-out;
+            `;
 
             document.querySelector('.hero-section')?.appendChild(goldWave);
 
             // 6. ADD CSS ANIMATIONS
             const style = document.createElement('style');
             style.textContent = `
-        @keyframes letterDrop {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes waveFlow {
-            0% {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-        
-        /* Floating animation for cards */
-        .poodle-card, .customer-card {
-            animation: floatCard 6s ease-in-out infinite;
-        }
-        
-        @keyframes floatCard {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-        
-        /* Gold hover effect */
-        .btn-gold {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-gold:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s;
-        }
-        
-        .btn-gold:hover:before {
-            left: 100%;
-        }
-    `;
+                @keyframes letterDrop {
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                @keyframes fadeUp {
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                @keyframes waveFlow {
+                    0% {
+                        transform: translateX(-100%);
+                        opacity: 0;
+                    }
+                    50% {
+                        opacity: 0.3;
+                    }
+                    100% {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+                
+                /* Floating animation for cards */
+                .poodle-card, .customer-card {
+                    animation: floatCard 6s ease-in-out infinite;
+                }
+                
+                @keyframes floatCard {
+                    0%, 100% {
+                        transform: translateY(0);
+                    }
+                    50% {
+                        transform: translateY(-15px);
+                    }
+                }
+                
+                /* Gold hover effect */
+                .btn-gold {
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .btn-gold:before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                    transition: left 0.7s;
+                }
+                
+                .btn-gold:hover:before {
+                    left: 100%;
+                }
+            `;
 
             document.head.appendChild(style);
 
@@ -615,59 +911,64 @@
 
                 // Remove gold wave after animation
                 setTimeout(() => {
-                    goldWave.remove();
+                    if (goldWave.parentNode) {
+                        goldWave.remove();
+                    }
                 }, 2000);
             }, 2000);
 
             // 8. SCROLL INDICATOR ANIMATION
             const scrollIndicator = document.createElement('div');
             scrollIndicator.style.cssText = `
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 30px;
-        height: 50px;
-        border: 2px solid var(--rich-gold);
-        border-radius: 15px;
-        opacity: 0;
-        animation: fadeInScroll 1s ease-out 2s forwards;
-    `;
+                position: absolute;
+                bottom: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 30px;
+                height: 50px;
+                border: 2px solid var(--rich-gold);
+                border-radius: 15px;
+                opacity: 0;
+                animation: fadeInScroll 1s ease-out 2s forwards;
+            `;
 
             const scrollDot = document.createElement('div');
             scrollDot.style.cssText = `
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 6px;
-        height: 6px;
-        background: var(--rich-gold);
-        border-radius: 50%;
-        animation: scrollBounce 2s infinite 2.5s;
-    `;
+                position: absolute;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 6px;
+                height: 6px;
+                background: var(--rich-gold);
+                border-radius: 50%;
+                animation: scrollBounce 2s infinite 2.5s;
+            `;
 
             scrollIndicator.appendChild(scrollDot);
-            document.querySelector('.hero-section')?.appendChild(scrollIndicator);
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.appendChild(scrollIndicator);
+            }
 
             // Add scroll indicator animations
             const scrollStyle = document.createElement('style');
             scrollStyle.textContent = `
-        @keyframes fadeInScroll {
-            to { opacity: 0.7; }
-        }
-        
-        @keyframes scrollBounce {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
-                opacity: 1;
-            }
-            50% {
-                transform: translateX(-50%) translateY(20px);
-                opacity: 0.5;
-            }
-        }
-    `;
+                @keyframes fadeInScroll {
+                    to { opacity: 0.7; }
+                }
+                
+                @keyframes scrollBounce {
+                    0%, 100% {
+                        transform: translateX(-50%) translateY(0);
+                        opacity: 1;
+                    }
+                    50% {
+                        transform: translateX(-50%) translateY(20px);
+                        opacity: 0.5;
+                    }
+                }
+            `;
             document.head.appendChild(scrollStyle);
 
             // Remove scroll indicator on scroll
@@ -675,15 +976,22 @@
                 if (window.scrollY > 100) {
                     scrollIndicator.style.opacity = '0';
                     scrollIndicator.style.transition = 'opacity 0.5s';
-                    setTimeout(() => scrollIndicator.remove(), 500);
+                    setTimeout(() => {
+                        if (scrollIndicator.parentNode) {
+                            scrollIndicator.remove();
+                        }
+                    }, 500);
                     window.removeEventListener('scroll', removeIndicator);
                 }
             });
+
+            // Inicijalno pokretanje fade-in animacija
+            fadeInOnScroll();
         });
 
         // ===== NAVBAR SCROLL EFFECT =====
         window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.navbar');
+            const navbar = document.querySelector('.site-header');
             if (navbar) {
                 if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
@@ -691,17 +999,51 @@
                     navbar.classList.remove('scrolled');
                 }
             }
+
+            // Back to top dugme
+            const backToTop = document.querySelector('.back-to-top');
+            if (backToTop) {
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
         });
+
+        // ===== FADE-IN ANIMATION ON SCROLL =====
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const fadeInOnScroll = function () {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', fadeInOnScroll);
 
         // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
 
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
+                    e.preventDefault();
+
+                    // Zatvori hamburger meni ako je otvoren
+                    const navMenu = document.getElementById('navMenu');
+                    if (navMenu && navMenu.classList.contains('show')) {
+                        const bsCollapse = new bootstrap.Collapse(navMenu);
+                        bsCollapse.hide();
+                    }
+
                     window.scrollTo({
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
@@ -709,43 +1051,60 @@
                 }
             });
         });
-        // Dodaj na kraj scripta
-        const backToTop = document.createElement('button');
-        backToTop.innerHTML = '<i class="fas fa-chevron-up"></i>';
-        backToTop.className = 'back-to-top';
-        backToTop.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: var(--rich-gold);
-    border: none;
-    border-radius: 50%;
-    color: var(--dark-black);
-    font-size: 1.2rem;
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
-`;
 
-        document.body.appendChild(backToTop);
+        // ===== GALLERY HOVER EFFECT =====
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function () {
+                const overlay = this.querySelector('.gallery-overlay');
+                if (overlay) {
+                    overlay.style.background = 'linear-gradient(transparent, rgba(212, 175, 55, 0.8))';
+                }
+            });
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                backToTop.style.opacity = '1';
-                backToTop.style.transform = 'translateY(0)';
-            } else {
-                backToTop.style.opacity = '0';
-                backToTop.style.transform = 'translateY(20px)';
-            }
+            item.addEventListener('mouseleave', function () {
+                const overlay = this.querySelector('.gallery-overlay');
+                if (overlay) {
+                    overlay.style.background = 'linear-gradient(transparent, rgba(212, 175, 55, 0.7))';
+                }
+            });
         });
 
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // ===== BACK TO TOP FUNCTIONALITY =====
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // 1. Loading screen - provera postojanja
+            const loader = document.querySelector('.loading-screen');
+            if (loader) {
+                setTimeout(() => {
+                    loader.classList.add('fade-out');
+                }, 500);
+            }
+
+            // 2. Back to Top dugme - provera postojanja
+            const backToTop = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', () => {
+                if (backToTop) {
+                    if (window.scrollY > 300) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                }
+            });
+
+            // 3. Animacija na skrol (Intersection Observer)
+            const observerOptions = { threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                if (el) observer.observe(el);
+            });
         });
     </script>
 </body>

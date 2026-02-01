@@ -6,35 +6,35 @@
     --accent-gold: #ffd700;
     --text-light: #ffffff;
     --text-gray: #d6b318;
+    
+    /* NOVE TIFFANY BOJE */
+    --tiffany-blue: #81d8d0;
+    --tiffany-dark: #009688;
+    --tiffany-light: #b2ebf2;
+    --tiffany-accent: #4db6ac;
+}
 
-        // NOVE TIFFANY BOJE
-    --tiffany-blue: #81d8d0;          // Osnovni Tiffany Blue
-    --tiffany-dark: #009688;          // Tamniji za hover
-    --tiffany-light: #b2ebf2;         // Svetliji za pozadine
-    --tiffany-accent: #4db6ac;        // Akcent
-
-    // ANTI-WHITE-FLASH - OVO IDE NA VRH SCSS-A
+/* ANTI-WHITE-FLASH - OVO IDE NA VRH SCSS-A */
 html, body {
-    background-color: $primary-black !important;
+    background-color: var(--primary-black) !important;
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
-    height: 100% !important;
+    /* Promenjeno sa height: 100% na min-height kako bi dozvolilo skrolovanje */
+    min-height: 100vh !important; 
+    /* Uklonjen overflow: hidden koji je blokirao skrolovanje */
     overflow-x: hidden !important;
-    
-    * {
-        background-color: inherit !important;
-    }
+    overflow-y: auto !important; 
 }
 
-// LOADING SCREEN - SCSS VARIJANTA
+/* LOADING SCREEN */
 .loading-screen {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    background: $primary-black !important;
+    background: var(--primary-black) !important;
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -44,45 +44,38 @@ html, body {
     padding: 0 !important;
     border: none !important;
     overflow: hidden !important;
-    
-    // Nested elements
-    * {
-        background-color: transparent !important;
-    }
-    
-    .loading-content {
-        text-align: center !important;
-        background: transparent !important;
-    }
-    
-    .gold-spinner {
-        width: 60px !important;
-        height: 60px !important;
-        border: 4px solid rgba($rich-gold, 0.3) !important;
-        border-radius: 50% !important;
-        border-top-color: $rich-gold !important;
-        animation: spin 1s ease-in-out infinite !important;
-        margin: 0 auto !important;
-        background: transparent !important;
-    }
-    
-    // Animacija
-    @keyframes spin {
-        to { 
-            transform: rotate(360deg); 
-        }
-    }
-    
-    // Fade out state
-    &.fade-out {
-        opacity: 0 !important;
-        pointer-events: none !important;
+}
+
+.loading-content {
+    text-align: center !important;
+    background: transparent !important;
+}
+
+.gold-spinner {
+    width: 60px !important;
+    height: 60px !important;
+    border: 4px solid rgba(212, 175, 55, 0.3) !important;
+    border-radius: 50% !important;
+    border-top-color: var(--rich-gold) !important;
+    animation: spin 1s ease-in-out infinite !important;
+    margin: 0 auto !important;
+    background: transparent !important;
+}
+
+@keyframes spin {
+    to { 
+        transform: rotate(360deg); 
     }
 }
 
-// PREVENT ANY WHITE BACKGROUNDS
+.loading-screen.fade-out {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* PREVENT ANY WHITE BACKGROUNDS */
 .bg-white, .bg-light, .white, [class*="bg-"] {
-    background-color: $primary-black !important;
+    background-color: var(--primary-black) !important;
 }
 
 /* === POBOLJŠANJE TEKSTA U ABOUT SEKCIJI === */
@@ -107,12 +100,9 @@ html, body {
     margin-bottom: 0.8rem !important;
     font-size: 1.05rem !important;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Cinzel', serif;
     font-weight: 600;
 }
@@ -138,14 +128,13 @@ h6 {
     background: linear-gradient(90deg, transparent, var(--rich-gold), transparent);
 }
 
-/* Header & Navigation */
 /* ===== PREMIUM NAVIGACIJA ===== */
 .navbar {
-    background-color: rgba(10, 10, 10, 0.98) !important;
+    position: relative !important; /* Ovo ga "otkačinje" sa vrha ekrana */
+    background-color: rgba(10, 10, 10, 1) !important;
     padding: 1.2rem 0 !important;
-    backdrop-filter: blur(10px) !important;
     border-bottom: 2px solid rgba(212, 175, 55, 0.3) !important;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5) !important;
+    z-index: 1000;
 }
 
 .navbar.scrolled {
@@ -241,33 +230,49 @@ h6 {
     text-shadow: 0 0 10px rgba(212, 175, 55, 0.5) !important;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE - IZMIJENJENO ZA TRANSPARENTNOST */
 @media (max-width: 992px) {
+    .navbar {
+        background-color: rgba(10, 10, 10, 0.95) !important;
+        backdrop-filter: blur(15px) !important;
+    }
+    
     .navbar-nav {
         background-color: rgba(10, 10, 10, 0.95) !important;
         padding: 1.5rem !important;
         border-radius: 5px !important;
         border: 1px solid rgba(212, 175, 55, 0.2) !important;
         margin-top: 1rem !important;
+        backdrop-filter: blur(10px) !important;
     }
     
     .navbar-nav .nav-link {
         margin: 0.5rem 0 !important;
         text-align: center !important;
+        background-color: transparent !important;
     }
     
     .navbar-brand {
         font-size: 1.6rem !important;
     }
+    
+    /* OVO JE KLJUČNO ZA TRANSPARENTNOST NA MOBILNOM */
+    .navbar-collapse {
+        background-color: rgba(10, 10, 10, 0.95) !important;
+        backdrop-filter: blur(15px) !important;
+        border-radius: 0 0 10px 10px !important;
+        padding: 1rem !important;
+        margin-top: 10px !important;
+    }
 }
+
 /* Hero Section */
 .hero-section {
-    height: 100vh;
+    min-height: 100vh; /* Koristi min-height umesto height */
     background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.7)), url('../assets/gallery/banner.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
 }
 
 .hero-content {
@@ -285,7 +290,6 @@ h6 {
 
 .hero-content .lead {
     color: var(--light-gold);
-    /* #f4e4a6 */
 }
 
 .hero-subtitle {
@@ -319,7 +323,28 @@ h6 {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
+.about-image-container {
+    position: relative;
+    padding: 20px;
+}
 
+.about-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 80%;
+    border-top: 2px solid var(--rich-gold);
+    border-right: 2px solid var(--rich-gold);
+    z-index: 0;
+}
+
+.about-image-container img {
+    position: relative;
+    z-index: 1;
+    box-shadow: 20px 20px 40px rgba(0,0,0,0.5);
+}
 /* About Section */
 .about-section {
     padding: 6rem 0;
@@ -349,7 +374,10 @@ h6 {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
-
+.about-content p:first-of-type::first-letter { 
+    font-size: 2rem;
+    color: var(--rich-gold); float: left; margin-right: 5px;
+}
 /* Poodles Section */
 .poodles-section {
     padding: 6rem 0;
@@ -479,7 +507,6 @@ h6 {
         opacity: 0;
         transform: translateY(30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -522,5 +549,14 @@ h6 {
     .section-title {
         font-size: 2rem;
     }
-}
+    
+    /* Dodatne mobile optimizacije */
+    .poodle-card, .customer-card, .about-content {
+        margin-bottom: 2rem;
+    }
+    
+    .gallery-item {
+        height: 250px;
+        margin-bottom: 1rem;
+    }
 }
