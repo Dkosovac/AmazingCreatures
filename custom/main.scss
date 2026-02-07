@@ -1,3 +1,4 @@
+
 :root {
     --primary-black: #0a0a0a;
     --dark-black: #111;
@@ -25,6 +26,7 @@ html, body {
     /* Uklonjen overflow: hidden koji je blokirao skrolovanje */
     overflow-x: hidden !important;
     overflow-y: auto !important; 
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* LOADING SCREEN */
@@ -103,7 +105,6 @@ html, body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cursive', font-serif;
     font-weight: 900;
 }
 
@@ -145,7 +146,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* LOGO - PREMIUM STIL */
 .navbar-brand {
-    font-family: 'Cinzel', serif !important;
     font-size: 2rem !important;
     font-weight: 700 !important;
     color: var(--rich-gold) !important;
@@ -426,7 +426,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 .section-title {
     padding: 1rem;
-    font-family: cursive; /* Elegantan font */
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 10px;
@@ -531,7 +530,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-logo {
-    font-family: 'Cinzel', serif;
     font-size: 2rem;
     font-weight: 700;
     color: var(--rich-gold);
@@ -624,7 +622,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #d4af37;
     margin-top: 15px;
     font-size: 1.2rem;
-    font-family: serif;
 }
 
 /* Dugmad za navigaciju */
