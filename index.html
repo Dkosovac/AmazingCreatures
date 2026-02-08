@@ -2002,490 +2002,583 @@ html {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // ===== POCETNA ANIMACIJA =====
-        document.addEventListener('DOMContentLoaded', function () {
-            // 1. PAGE FADE IN
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 1s ease-out';
+<script>
+    // ================================================
+// PREMIUM ANIMATION ENGINE - AMAZING CREATURES
+// ================================================
 
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
+'use strict';
 
-            // 2. NAVBAR SLIDE DOWN
-            const navbar = document.querySelector('.site-header');
-            if (navbar) {
-                navbar.style.transform = 'translateY(-100%)';
-                navbar.style.transition = 'transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-
-                setTimeout(() => {
-                    navbar.style.transform = 'translateY(0)';
-                }, 300);
+(function() {
+    // ================================================
+    // CONFIGURATION & CONSTANTS
+    // ================================================
+    const CONFIG = {
+        animation: {
+            duration: {
+                pageFade: 300,
+                navbarSlide: 800,
+                letterDrop: 500,
+                heroStagger: 600,
+                waveFlow: 2000,
+                scrollBounce: 2000
+            },
+            easing: {
+                bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                smooth: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                linear: 'ease-out'
             }
+        },
+        thresholds: {
+            navbarScroll: 50,
+            backToTop: 300,
+            fadeIn: 150,
+            scrollIndicator: 100
+        },
+        selectors: {
+            navbar: '.site-header',
+            backToTop: '.back-to-top',
+            heroTitle: '.hero-title',
+            heroSection: '.hero-section',
+            fadeElements: '.fade-in',
+            galleryItems: '.gallery-item',
+            galleryImages: '.gallery-img',
+            lightboxModal: '#lightbox-modal',
+            navMenu: '#navMenu',
+            loadingScreen: '.loading-screen'
+        },
+        colors: {
+            gold: '#d4af37',
+            lightGold: '#f4e4a6'
+        }
+    };
 
-            // 3. HERO TITLE ANIMATION
-            const heroTitle = document.querySelector('.hero-title');
-            if (heroTitle) {
-                const text = heroTitle.textContent;
-                heroTitle.innerHTML = '';
+    // ================================================
+    // CORE ANIMATION ENGINE
+    // ================================================
+    class AnimationEngine {
+        constructor() {
+            this.cache = new Map();
+            this.rafIds = new Set();
+            this.observers = new Map();
+            this.isHeroPage = false;
+            this.init();
+        }
 
-                text.split('').forEach((char, index) => {
-                    const span = document.createElement('span');
-                    span.textContent = char === ' ' ? '\u00A0' : char;
-                    span.style.display = 'inline-block';
-                    span.style.opacity = '0';
-                    span.style.transform = 'translateY(30px)';
-                    span.style.animation = `letterDrop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards ${index * 0.05}s`;
-                    heroTitle.appendChild(span);
-                });
-            }
+        init() {
+            this.cacheElements();
+            this.setupEventListeners();
+            this.initAnimations();
+        }
 
-            // 4. HERO ELEMENTS STAGGER
-            const heroElements = document.querySelectorAll('.hero-subtitle, .hero-divider, .btn-gold');
-            heroElements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.animation = `fadeUp 0.6s ease-out forwards ${0.8 + (index * 0.2)}s`;
-            });
-
-            // 5. GOLD WAVE ANIMATION
-            const goldWave = document.createElement('div');
-            goldWave.className = 'gold-wave-animated';
-            goldWave.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(212, 175, 55, 0.1),
-                    rgba(212, 175, 55, 0.15),
-                    rgba(212, 175, 55, 0.1),
-                    transparent
-                );
-                pointer-events: none;
-                z-index: 1;
-                transform: translateX(-100%);
-                animation: waveFlow 2s ease-out;
-            `;
-
-            document.querySelector('.hero-section')?.appendChild(goldWave);
-
-            // 6. ADD CSS ANIMATIONS
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes letterDrop {
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
+        cacheElements() {
+            Object.entries(CONFIG.selectors).forEach(([key, selector]) => {
+                const element = selector.startsWith('#') 
+                    ? document.getElementById(selector.substring(1))
+                    : document.querySelector(selector);
                 
-                @keyframes fadeUp {
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-                
-                @keyframes waveFlow {
-                    0% {
-                        transform: translateX(-100%);
-                        opacity: 0;
-                    }
-                    50% {
-                        opacity: 0.3;
-                    }
-                    100% {
-                        transform: translateX(100%);
-                        opacity: 0;
-                    }
-                }
-                
-                /* Floating animation for cards */
-                .poodle-card, .customer-card {
-                    animation: floatCard 6s ease-in-out infinite;
-                }
-                
-                @keyframes floatCard {
-                    0%, 100% {
-                        transform: translateY(0);
-                    }
-                    50% {
-                        transform: translateY(-15px);
-                    }
-                }
-                
-                /* Gold hover effect */
-                .btn-gold {
-                    position: relative;
-                    overflow: hidden;
-                }
-                
-                .btn-gold:before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-                    transition: left 0.7s;
-                }
-                
-                .btn-gold:hover:before {
-                    left: 100%;
-                }
-            `;
-
-            document.head.appendChild(style);
-
-            // 7. REMOVE ANIMATION STYLES AFTER COMPLETION
-            setTimeout(() => {
-                heroElements.forEach(el => {
-                    el.style.opacity = '';
-                    el.style.transform = '';
-                    el.style.animation = '';
-                });
-
-                // Remove gold wave after animation
-                setTimeout(() => {
-                    if (goldWave.parentNode) {
-                        goldWave.remove();
-                    }
-                }, 2000);
-            }, 2000);
-
-            // 8. SCROLL INDICATOR ANIMATION
-            const scrollIndicator = document.createElement('div');
-            scrollIndicator.style.cssText = `
-                position: absolute;
-                bottom: 40px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 30px;
-                height: 50px;
-                border: 2px solid var(--rich-gold);
-                border-radius: 15px;
-                opacity: 0;
-                animation: fadeInScroll 1s ease-out 2s forwards;
-            `;
-
-            const scrollDot = document.createElement('div');
-            scrollDot.style.cssText = `
-                position: absolute;
-                top: 10px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 6px;
-                height: 6px;
-                background: var(--rich-gold);
-                border-radius: 50%;
-                animation: scrollBounce 2s infinite 2.5s;
-            `;
-
-            scrollIndicator.appendChild(scrollDot);
-            const heroSection = document.querySelector('.hero-section');
-            if (heroSection) {
-                heroSection.appendChild(scrollIndicator);
-            }
-
-            // Add scroll indicator animations
-            const scrollStyle = document.createElement('style');
-            scrollStyle.textContent = `
-                @keyframes fadeInScroll {
-                    to { opacity: 0.7; }
-                }
-                
-                @keyframes scrollBounce {
-                    0%, 100% {
-                        transform: translateX(-50%) translateY(0);
-                        opacity: 1;
-                    }
-                    50% {
-                        transform: translateX(-50%) translateY(20px);
-                        opacity: 0.5;
-                    }
-                }
-            `;
-            document.head.appendChild(scrollStyle);
-
-            // Remove scroll indicator on scroll
-            window.addEventListener('scroll', function removeIndicator() {
-                if (window.scrollY > 100) {
-                    scrollIndicator.style.opacity = '0';
-                    scrollIndicator.style.transition = 'opacity 0.5s';
-                    setTimeout(() => {
-                        if (scrollIndicator.parentNode) {
-                            scrollIndicator.remove();
-                        }
-                    }, 500);
-                    window.removeEventListener('scroll', removeIndicator);
-                }
-            });
-
-            // Inicijalno pokretanje fade-in animacija
-            fadeInOnScroll();
-        });
-
-        // ===== NAVBAR SCROLL EFFECT =====
-        window.addEventListener('scroll', function () {
-            const navbar = document.querySelector('.site-header');
-            if (navbar) {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
+                if (key === 'fadeElements' || key === 'galleryItems' || key === 'galleryImages') {
+                    this.cache.set(key, document.querySelectorAll(selector));
                 } else {
-                    navbar.classList.remove('scrolled');
+                    this.cache.set(key, element);
                 }
-            }
+            });
 
-            // Back to top dugme
-            const backToTop = document.querySelector('.back-to-top');
+            this.isHeroPage = !!this.cache.get('heroSection');
+        }
+
+        // ================================================
+        // HIGH-PERFORMANCE EVENT HANDLING
+        // ================================================
+        setupEventListeners() {
+            // Single scroll handler with debouncing
+            this.debouncedScroll = this.debounce(this.handleScroll.bind(this), 16);
+            window.addEventListener('scroll', this.debouncedScroll, { passive: true });
+
+            // Smooth scroll for anchor links
+            this.setupSmoothScroll();
+
+            // Gallery interactions
+            this.setupGallery();
+
+            // Back to top
+            const backToTop = this.cache.get('backToTop');
             if (backToTop) {
-                if (window.scrollY > 500) {
-                    backToTop.classList.add('visible');
-                } else {
-                    backToTop.classList.remove('visible');
-                }
+                backToTop.addEventListener('click', () => this.scrollToTop());
             }
-        });
 
-        // ===== FADE-IN ANIMATION ON SCROLL =====
-        const fadeElements = document.querySelectorAll('.fade-in');
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', (e) => this.handleKeyboard(e));
+        }
 
-        const fadeInOnScroll = function () {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
+        // ================================================
+        // PAGE ENTRANCE ANIMATIONS
+        // ================================================
+        initAnimations() {
+            // Page fade in
+            requestAnimationFrame(() => {
+                document.body.classList.add('page-loaded');
             });
-        };
 
-        window.addEventListener('scroll', fadeInOnScroll);
+            // Hero page specific animations
+            if (this.isHeroPage) {
+                this.animateHeroEntrance();
+                this.createScrollIndicator();
+            }
 
-        // ===== SMOOTH SCROLL =====
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-
-                    // Zatvori hamburger meni ako je otvoren
-                    const navMenu = document.getElementById('navMenu');
-                    if (navMenu && navMenu.classList.contains('show')) {
-                        const bsCollapse = new bootstrap.Collapse(navMenu);
-                        bsCollapse.hide();
-                    }
-
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // ===== GALLERY HOVER EFFECT =====
-
-
-        // ===== BACK TO TOP FUNCTIONALITY =====
-        document.addEventListener('DOMContentLoaded', function () {
-
-            // 1. Loading screen - provera postojanja
-            const loader = document.querySelector('.loading-screen');
+            // Loading screen
+            const loader = this.cache.get('loadingScreen');
             if (loader) {
                 setTimeout(() => {
-                    loader.classList.add('fade-out');
-                }, 500);
+                    loader.classList.add('loaded');
+                }, CONFIG.animation.duration.pageFade);
             }
 
-            // 2. Back to Top dugme - provera postojanja
-            const backToTop = document.querySelector('.back-to-top');
-            window.addEventListener('scroll', () => {
-                if (backToTop) {
-                    if (window.scrollY > 300) {
-                        backToTop.classList.add('visible');
-                    } else {
-                        backToTop.classList.remove('visible');
-                    }
-                }
-            });
+            // Fade in on scroll
+            this.initIntersectionObserver();
+        }
 
-            // 3. Animacija na skrol (Intersection Observer)
-            const observerOptions = { threshold: 0.1 };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, observerOptions);
+        animateHeroEntrance() {
+            const navbar = this.cache.get('navbar');
+            const heroTitle = this.cache.get('heroTitle');
+            const heroSection = this.cache.get('heroSection');
 
-            document.querySelectorAll('.fade-in').forEach(el => {
-                if (el) observer.observe(el);
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const galleryItems = document.querySelectorAll(".gallery-item");
-
-            // Dodajemo animaciju ulaska jednu po jednu (stagger effect)
-            galleryItems.forEach((item, index) => {
-                item.style.opacity = "0";
-                item.style.transform = "translateY(30px)";
-
+            // Navbar slide down
+            if (navbar) {
+                navbar.classList.add('navbar-entering');
                 setTimeout(() => {
-                    item.style.transition = "all 0.8s ease-out";
-                    item.style.opacity = "1";
-                    item.style.transform = "translateY(0)";
-                }, index * 150); // Svaka sledeća slika kasni 150ms
-            });
+                    navbar.classList.remove('navbar-entering');
+                    navbar.classList.add('navbar-visible');
+                }, 100);
+            }
 
-            // Lightbox funkcionalnost (Klik na sliku)
-            galleryItems.forEach(item => {
-                item.addEventListener("click", function () {
-                    const imgSrc = this.querySelector("img").src;
-                    const altText = this.querySelector("img").alt;
+            // Hero title letter animation
+            if (heroTitle) {
+                this.animateLetters(heroTitle);
+            }
 
-                    openLightbox(imgSrc, altText);
-                });
-            });
-        });
+            // Hero elements stagger
+            const heroElements = heroSection?.querySelectorAll('.hero-subtitle, .hero-divider, .btn-gold');
+            if (heroElements) {
+                this.staggerAnimation(heroElements, 200);
+            }
 
-        function openLightbox(src, alt) {
-            // Kreiranje dinamičkog modala ako ne postoji
-            let modal = document.getElementById("lightbox-modal");
-            if (!modal) {
-                modal = document.createElement("div");
-                modal.id = "lightbox-modal";
-                modal.style = `
-            position: fixed; z-index: 10000; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); display: flex; align-items: center; 
-            justify-content: center; cursor: zoom-out; opacity: 0; transition: 0.3s;
-        `;
-                modal.innerHTML = `<img src="${src}" style="max-width: 90%; max-height: 85vh; border: 2px solid #d4af37; border-radius: 10px;">
-                           <p style="position: absolute; bottom: 20px; color: #d4af37; font-family: Montserrat, sans serif;">${alt}</p>`;
-                document.body.appendChild(modal);
-
-                // Animacija otvaranja
-                setTimeout(() => modal.style.opacity = "1", 10);
-
-                modal.onclick = () => {
-                    modal.style.opacity = "0";
-                    setTimeout(() => modal.remove(), 300);
-                };
+            // Gold wave effect
+            if (heroSection) {
+                this.createGoldWave(heroSection);
             }
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const modal = document.getElementById("lightbox-modal");
-            const modalImg = document.getElementById("modal-img");
-            const captionText = document.getElementById("modal-caption");
-            const closeBtn = document.querySelector(".close-lightbox");
-            const prevBtn = document.getElementById("prevBtn");
-            const nextBtn = document.getElementById("nextBtn");
+        // ================================================
+        // ADVANCED ANIMATION METHODS
+        // ================================================
+        animateLetters(element) {
+            const text = element.textContent;
+            element.innerHTML = '';
+            
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.className = 'letter-animation';
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.style.setProperty('--letter-index', index);
+                element.appendChild(span);
+            });
+        }
 
-            // Uzimamo sve slike iz galerije
-            const galleryItems = Array.from(document.querySelectorAll(".gallery-img"));
-            let currentIndex = 0;
+        staggerAnimation(elements, delay = 150) {
+            elements.forEach((el, index) => {
+                el.style.setProperty('--stagger-index', index);
+                el.classList.add('stagger-animation');
+            });
 
-            // Funkcija za otvaranje modala na osnovu indeksa
-            function openImage(index) {
-                currentIndex = index;
-                const selectedImg = galleryItems[currentIndex];
-
-                modal.style.display = "flex";
-                modalImg.src = selectedImg.src;
-                captionText.innerHTML = selectedImg.alt;
-            }
-
-            // Dodaj klik event na svaku sliku u galeriji
-            galleryItems.forEach((img, index) => {
-                img.parentElement.addEventListener("click", () => {
-                    openImage(index);
+            // Cleanup after animations complete
+            const totalDuration = elements.length * delay + CONFIG.animation.duration.heroStagger;
+            setTimeout(() => {
+                elements.forEach(el => {
+                    el.classList.remove('stagger-animation');
+                    el.style.removeProperty('--stagger-index');
                 });
-            });
+            }, totalDuration);
+        }
 
-            // Sledeća slika
-            function showNext() {
-                currentIndex = (currentIndex + 1) % galleryItems.length;
-                updateModal();
+        createGoldWave(container) {
+            const wave = document.createElement('div');
+            wave.className = 'gold-wave-effect';
+            container.appendChild(wave);
+
+            setTimeout(() => {
+                if (wave.parentNode) wave.remove();
+            }, CONFIG.animation.duration.waveFlow);
+        }
+
+        createScrollIndicator() {
+            const heroSection = this.cache.get('heroSection');
+            if (!heroSection) return;
+
+            const indicator = document.createElement('div');
+            indicator.className = 'scroll-indicator';
+            indicator.innerHTML = '<div class="scroll-indicator-dot"></div>';
+            heroSection.appendChild(indicator);
+
+            // Auto-remove on scroll
+            const removeIndicator = () => {
+                if (window.scrollY > CONFIG.thresholds.scrollIndicator) {
+                    indicator.classList.add('fading-out');
+                    setTimeout(() => indicator.remove(), 500);
+                    window.removeEventListener('scroll', removeIndicator);
+                }
+            };
+            window.addEventListener('scroll', removeIndicator, { passive: true });
+        }
+
+        // ================================================
+        // SCROLL-BASED ANIMATIONS
+        // ================================================
+        handleScroll() {
+            const scrollY = window.scrollY;
+            const navbar = this.cache.get('navbar');
+            const backToTop = this.cache.get('backToTop');
+
+            // Navbar scroll effect
+            if (navbar) {
+                navbar.classList.toggle('navbar-scrolled', scrollY > CONFIG.thresholds.navbarScroll);
             }
 
-            // Prethodna slika
-            function showPrev() {
-                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-                updateModal();
+            // Back to top button
+            if (backToTop) {
+                backToTop.classList.toggle('visible', scrollY > CONFIG.thresholds.backToTop);
             }
+        }
 
-            // Update slike u modalu bez ponovnog otvaranja celog modala
-            function updateModal() {
-                modalImg.style.opacity = "0"; // Jednostavna animacija prelaza
-                setTimeout(() => {
-                    modalImg.src = galleryItems[currentIndex].src;
-                    captionText.innerHTML = galleryItems[currentIndex].alt;
-                    modalImg.style.opacity = "1";
-                }, 200);
-            }
+        initIntersectionObserver() {
+            const fadeElements = this.cache.get('fadeElements');
+            if (!fadeElements?.length) return;
 
-            // Eventovi za dugmad
-            nextBtn.addEventListener("click", (e) => {
-                e.stopPropagation(); // Sprečava zatvaranje modala
-                showNext();
-            });
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('in-view');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    rootMargin: '50px',
+                    threshold: 0.1
+                }
+            );
 
-            prevBtn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                showPrev();
-            });
+            fadeElements.forEach(el => observer.observe(el));
+            this.observers.set('fadeObserver', observer);
+        }
 
-            // Zatvaranje
-            closeBtn.onclick = () => modal.style.display = "none";
-            modal.onclick = (e) => {
-                if (e.target === modal) modal.style.display = "none";
+        // ================================================
+        // GALLERY & LIGHTBOX SYSTEM
+        // ================================================
+        setupGallery() {
+            const galleryItems = this.cache.get('galleryItems');
+            const modal = this.cache.get('lightboxModal');
+
+            if (!galleryItems?.length || !modal) return;
+
+            // Lightbox system
+            this.lightbox = {
+                modal,
+                currentIndex: 0,
+                images: Array.from(document.querySelectorAll('.gallery-img')),
+                isOpen: false
             };
 
-            // Kontrole na tastaturi
-            document.addEventListener("keydown", (e) => {
-                if (modal.style.display === "flex") {
-                    if (e.key === "ArrowRight") showNext();
-                    if (e.key === "ArrowLeft") showPrev();
-                    if (e.key === "Escape") modal.style.display = "none";
+            // Gallery item animations
+            this.animateGalleryEntrance(galleryItems);
+
+            // Click handlers
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => this.openLightbox(index));
+            });
+
+            // Lightbox controls
+            const closeBtn = modal.querySelector('.close-lightbox');
+            const prevBtn = modal.querySelector('.prev-btn');
+            const nextBtn = modal.querySelector('.next-btn');
+
+            if (closeBtn) closeBtn.addEventListener('click', () => this.closeLightbox());
+            if (prevBtn) prevBtn.addEventListener('click', () => this.navigateLightbox(-1));
+            if (nextBtn) nextBtn.addEventListener('click', () => this.navigateLightbox(1));
+
+            // Close on backdrop click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) this.closeLightbox();
+            });
+        }
+
+        animateGalleryEntrance(items) {
+            items.forEach((item, index) => {
+                item.style.setProperty('--gallery-index', index);
+                item.classList.add('gallery-item-entering');
+                
+                // Remove class after animation
+                setTimeout(() => {
+                    item.classList.remove('gallery-item-entering');
+                    item.style.removeProperty('--gallery-index');
+                }, index * 150 + 800);
+            });
+        }
+
+        openLightbox(index) {
+            if (!this.lightbox || !this.lightbox.images[index]) return;
+
+            this.lightbox.currentIndex = index;
+            this.lightbox.isOpen = true;
+            
+            const modal = this.lightbox.modal;
+            const img = modal.querySelector('#modal-img');
+            const caption = modal.querySelector('#modal-caption');
+            const currentImage = this.lightbox.images[index];
+
+            if (img) img.src = currentImage.src;
+            if (caption) caption.textContent = currentImage.alt;
+
+            modal.classList.add('active');
+            document.body.classList.add('lightbox-open');
+        }
+
+        navigateLightbox(direction) {
+            if (!this.lightbox || !this.lightbox.isOpen) return;
+
+            const newIndex = (this.lightbox.currentIndex + direction + this.lightbox.images.length) % this.lightbox.images.length;
+            this.openLightbox(newIndex);
+        }
+
+        closeLightbox() {
+            if (!this.lightbox || !this.lightbox.isOpen) return;
+
+            const modal = this.lightbox.modal;
+            modal.classList.remove('active');
+            document.body.classList.remove('lightbox-open');
+            
+            setTimeout(() => {
+                this.lightbox.isOpen = false;
+            }, 300);
+        }
+
+        // ================================================
+        // SMOOTH SCROLL SYSTEM
+        // ================================================
+        setupSmoothScroll() {
+            document.addEventListener('click', (e) => {
+                const link = e.target.closest('a[href^="#"]');
+                if (!link) return;
+
+                const targetId = link.getAttribute('href');
+                if (targetId === '#') return;
+
+                e.preventDefault();
+                this.scrollToElement(targetId);
+                
+                // Close mobile menu if open
+                const navMenu = this.cache.get('navMenu');
+                if (navMenu?.classList.contains('show')) {
+                    const bsCollapse = window.bootstrap?.Collapse;
+                    if (bsCollapse) {
+                        new bsCollapse(navMenu).hide();
+                    }
                 }
             });
-        });
-    </script>
+        }
 
+        scrollToElement(selector) {
+            const target = document.querySelector(selector);
+            if (!target) return;
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Back to Top funkcionalnost
-    const backToTop = document.querySelector('.back-to-top');
-    
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            backToTop.classList.add('visible');
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition - 80;
+            const duration = 800;
+            let startTime = null;
+
+            const easeInOutCubic = (t) => {
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            };
+
+            const animation = (currentTime) => {
+                if (!startTime) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                const easeProgress = easeInOutCubic(progress);
+
+                window.scrollTo(0, startPosition + distance * easeProgress);
+
+                if (timeElapsed < duration) {
+                    this.rafIds.add(requestAnimationFrame(animation));
+                }
+            };
+
+            this.rafIds.add(requestAnimationFrame(animation));
+        }
+
+        scrollToTop() {
+            const startPosition = window.pageYOffset;
+            const duration = 600;
+            let startTime = null;
+
+            const easeOutCubic = (t) => {
+                return 1 - Math.pow(1 - t, 3);
+            };
+
+            const animation = (currentTime) => {
+                if (!startTime) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                const easeProgress = easeOutCubic(progress);
+
+                window.scrollTo(0, startPosition * (1 - easeProgress));
+
+                if (timeElapsed < duration) {
+                    this.rafIds.add(requestAnimationFrame(animation));
+                }
+            };
+
+            this.rafIds.add(requestAnimationFrame(animation));
+        }
+
+        // ================================================
+        // KEYBOARD NAVIGATION
+        // ================================================
+        handleKeyboard(e) {
+            if (!this.lightbox?.isOpen) return;
+
+            switch(e.key) {
+                case 'Escape':
+                    this.closeLightbox();
+                    break;
+                case 'ArrowLeft':
+                    this.navigateLightbox(-1);
+                    break;
+                case 'ArrowRight':
+                    this.navigateLightbox(1);
+                    break;
+            }
+        }
+
+        // ================================================
+        // PERFORMANCE OPTIMIZATION UTILITIES
+        // ================================================
+        debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
+        }
+
+        // ================================================
+        // CLEANUP & MEMORY MANAGEMENT
+        // ================================================
+        destroy() {
+            // Clean up RAF callbacks
+            this.rafIds.forEach(id => cancelAnimationFrame(id));
+            this.rafIds.clear();
+
+            // Disconnect observers
+            this.observers.forEach(observer => observer.disconnect());
+            this.observers.clear();
+
+            // Remove event listeners
+            window.removeEventListener('scroll', this.debouncedScroll);
+            
+            // Clear cache
+            this.cache.clear();
+        }
+    }
+
+    // ================================================
+    // INITIALIZATION
+    // ================================================
+    let animationEngine = null;
+
+    // Wait for DOM and critical resources
+    const initPremiumAnimations = () => {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                animationEngine = new AnimationEngine();
+            });
         } else {
-            backToTop.classList.remove('visible');
+            animationEngine = new AnimationEngine();
+        }
+    };
+
+    // Initialize with requestIdleCallback for better performance
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(initPremiumAnimations, { timeout: 2000 });
+    } else {
+        setTimeout(initPremiumAnimations, 100);
+    }
+
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+        if (animationEngine) {
+            animationEngine.destroy();
+            animationEngine = null;
         }
     });
-    
-    backToTop.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+
+    // Make engine available globally for debugging (optional)
+    if (window.AMAZING_CREATURES_DEBUG) {
+        window.animationEngine = animationEngine;
+    }
+
+})();
+
+// ================================================
+// OPTIONAL: INSTANT LOADING PROGRESS
+// ================================================
+(function() {
+    'use strict';
+
+    // Show loading state immediately
+    if (document.readyState === 'loading') {
+        document.documentElement.classList.add('page-loading');
+    }
+
+    // Remove loading class when everything is ready
+    const removeLoadingState = () => {
+        document.documentElement.classList.remove('page-loading');
+        document.documentElement.classList.add('page-ready');
+    };
+
+    if (document.readyState === 'complete') {
+        removeLoadingState();
+    } else {
+        window.addEventListener('load', removeLoadingState, { once: true });
+    }
+
+    // Enhanced error handling
+    window.addEventListener('error', (e) => {
+        console.error('Animation error:', e.error);
+        // Fallback to basic functionality
+        document.body.classList.add('animation-fallback');
     });
-});
+
+})();
 </script>
 
 
