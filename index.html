@@ -296,12 +296,45 @@ img {
         padding-top: 100px; /* Da tekst ne ode pod meni */
         align-items: center; /* I dalje centrirano */
     }
+/* ZAMENI STARI .hero-title OVIM KODOM */
+.hero-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    color: var(--rich-gold);
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.9);
+    margin-bottom: 20px;
+    
+    /* 1. CENTRIRANJE */
+    width: 100%;
+    text-align: center;
+    
+    /* 2. MAGIČNA FORMULA ZA VELIČINU (CLAMP)
+       - Minimum: 3rem (dovoljno veliko za telefon da reči odu jedna ispod druge)
+       - Idealno: 8vw (8% širine ekrana, raste kako raste ekran)
+       - Maksimum: 6rem (za velike monitore) */
+    font-size: clamp(3rem, 8vw, 6rem);
+    
+    /* 3. RAZMAK IZMEĐU REDOVA */
+    line-height: 1.1; 
+    
+    /* 4. KLJUČNO: OVO ZABRANJUJE SEČENJE REČI (nema CREA-TURES) */
+    hyphens: none;
+    -webkit-hyphens: none;
+    -ms-hyphens: none;
+    
+    /* 5. Dozvoljava prelazak u novi red samo IZMEĐU reči */
+    word-wrap: normal;
+    overflow-wrap: normal;
+}
 
+/* DODAJ OVO ODMAH ISPOD TOGA (SAMO ZA TELEFONE) 
+   Ovo forsira da na telefonu "AMAZING" bude gore, a "CREATURES" dole. */
+@media (max-width: 600px) {
     .hero-title {
-        /* Dodatno osiguranje da se reč ne lomi ružno */
-        word-break: break-word; 
-        margin-bottom: 20px;
+        font-size: 3.5rem; /* Dovoljno veliko da MORA da pređe u novi red */
+        padding: 0 10px;   /* Da ne udara u ivice ekrana */
     }
+}
 
     .hero-content p.lead {
         padding: 0 10px; /* Da tekst ne dira ivice ekrana */
