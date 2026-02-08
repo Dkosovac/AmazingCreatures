@@ -8,13 +8,11 @@
     <meta name="description"
         content="Dom najkvalitetnijih rodovničkih pudli u Srbiji. FCI 7364 - Zdravlje, karakter i genetika bez kompromisa.">
 
-
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     
-    <!-- Ako koristiš Bootstrap -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Open Graph / Facebook / WhatsApp -->
@@ -22,18 +20,16 @@
     <meta property="og:url" content="https://amazing-creatures.com/">
     <meta property="og:title" content="Amazing Creatures Kennel - Elitne Pudle">
     <meta property="og:description" content="Otkrijte naš svet šampionskih pudli odgajanih sa ljubavlju.">
-    <meta property="og:image" content="assets/gallery/og-image.jpg"> <!-- Napravi sliku 1200x630 -->
+    <meta property="og:image" content="assets/gallery/og-image.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:title" content="Amazing Creatures Kennel">
-    <link href="custom/main.scss" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap"
         rel="stylesheet">
-    <!-- Povezivanje sa Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -41,1814 +37,1657 @@
 
     <style>
         /* =========================================
-1. GLOBALNE PROMENLJIVE I RESET
-   ========================================= */
-
-:root {
-    /* Definišemo tvoje boje na jednom mestu */
-    --rich-gold: #d4af37;       /* Tvoja zlatna boja */
-    --light-gold: #f4e4a6;      /* Svetlija nijansa za hover */
-    --dark-black: #0a0a0a;      /* Skoro crna pozadina */
-    --text-white: #ffffff;      /* Bela boja teksta */
-    --overlay-dark: rgba(0, 0, 0, 0.7); /* Providna crna za slojeve */
-}
-
-/* Resetovanje svih elemenata da nemaju skrivene margine */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* Ključno: da padding ne širi elemente */
-}
-
-html {
-    scroll-behavior: smooth; /* Lepo klizanje kad klikneš na link */
-}
-
-body {
-    font-family: 'Montserrat', sans-serif; /* Glavni font za tekst */
-    background-color: var(--dark-black);
-    color: var(--text-white);
-    line-height: 1.6; /* Razmak između redova teksta */
-    overflow-x: hidden; /* SPREČAVA horizontalno skrolovanje (belu liniju desno) */
-    width: 100%;
-}
-
-/* Podešavanje naslova (onaj fensi font) */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--rich-gold); /* Svi naslovi su zlatni po defaultu */
-}
-
-/* Podešavanje linkova i slika */
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-}
-
-ul {
-    list-style: none; /* Sklanja tačkice sa listi */
-}
-
-img {
-    max-width: 100%; /* Slike nikad neće probiti ekran */
-    height: auto;
-    display: block;
-}
-
-/* Pomoćna klasa za zlatni tekst (koristićemo je često) */
-.gold-text {
-    color: var(--rich-gold) !important;
-}
-
-/*sajt header i hero */
-
-
-/* =========================================
-   2. HEADER & NAVIGACIJA (PREMIUM STIL)
-   ========================================= */
-
-.site-header {
-    position: absolute;      /* Stoji preko slike */
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 5%;        /* Razmak sa strane */
-    display: flex;
-    justify-content: space-between; /* Razdvaja logo i meni na ivice */
-    align-items: center;
-    z-index: 1000;           /* Uvek iznad svega */
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent); /* Blago zatamnjenje gore */
-}
-
-.logo img {
-    height: 100px;            /* Visina loga za Desktop */
-    width: auto;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); /* Senka da se bolje vidi */
-    transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-    transform: scale(1.05);  /* Blago uvećanje na hover */
-}
-
-/* Stil za HAMBURGER DUGME */
-.menu-toggle {
-    background: transparent;
-    border: 1px solid var(--rich-gold);
-    padding: 10px 12px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;                /* Razmak između linija */
-    transition: all 0.3s ease;
-    border-radius: 4px;
-}
-
-.menu-toggle span {
-    width: 30px;
-    height: 2px;
-    background-color: var(--rich-gold);
-    display: block;
-    transition: 0.3s;
-}
-
-.menu-toggle:hover {
-    background: rgba(212, 175, 55, 0.15);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-}
-
-/* NAV OVERLAY (Meni preko celog ekrana) */
-.nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(5, 5, 5, 0.98); /* Skoro crna pozadina */
-    z-index: 999;
-    display: flex;           /* Flex za centriranje linkova */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px); /* Premium blur efekat */
-}
-
-.nav-overlay ul {
-    text-align: center;
-}
-
-.nav-overlay a {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    color: var(--text-white);
-    display: block;
-    margin: 20px 0;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-.nav-overlay a:hover {
-    color: var(--rich-gold);
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-}
-
-/* =========================================
-   3. HERO SEKCIJA (CENTAR PAŽNJE)
-   ========================================= */
-
-.hero-section {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;       /* Minimalna visina ceo ekran */
-    
-    /* Pozadina sa tamnim slojem preko slike za bolju čitljivost teksta */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
-                url('assets/gallery/banner.jpg') center/cover no-repeat;
-                
-    display: flex;           /* Flexbox magija za centriranje */
-    align-items: center;     /* Vertikalno centriranje */
-    justify-content: center; /* Horizontalno centriranje */
-    text-align: center;      /* Sav tekst u centru */
-    padding: 80px 20px 20px; /* Padding da tekst ne beži pod header */
-}
-
-.hero-content {
-    max-width: 900px;        /* Ograničavamo širinu da redovi ne budu predugi */
-    width: 100%;
-    position: relative;
-    z-index: 10;
-}
-
-/* PREMIUM HERO TYPOGRAPHY */
-.hero-title {
-    font-family: 'Montserrat', sans-serif;
-    /* CLAMP: Font se automatski menja između 2rem (mobilni) i 5rem (desktop) */
-    font-size: clamp(0.1rem, 6vw, 2rem); 
-    line-height: 1.1;
-    letter-spacing: 2px;
-    margin-bottom: 1.5rem;
-    color: var(--rich-gold);
-    
-    /* Zlatni sjaj i senka teksta */
-    text-shadow: 2px 2px 10px rgba(0,0,0, 0.8);
-}
-
-.hero-content p.lead {
-    font-family: 'Montserrat', sans-serif;
-    font-size: clamp(0.9rem, 1.2vw, 1.2rem); /* Responsive font za opis */
-    color: #e0e0e0;          /* Svetlo siva je čitljivija od bele na tamnom */
-    margin-bottom: 2rem;
-    line-height: 1.8;
-    max-width: 700px;        /* Uži tekst za lakše čitanje */
-    margin-left: auto;
-    margin-right: auto;
-    text-shadow: 1px 1px 3px rgba(0,0,0, 0.9);
-}
-
-.hero-divider {
-    height: 2px;
-    width: 100px;
-    background: var(--rich-gold);
-    margin: 0 auto 20px auto; /* Centrirana linija */
-    box-shadow: 0 0 10px var(--rich-gold);
-}
-
-.hero-subtitle {
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    color: var(--light-gold);
-    margin-bottom: 30px;
-    font-weight: 600;
-}
-
-/* PREMIUM DUGME */
-.btn-gold {
-    background: var(--rich-gold);
-    color: var(--dark-black);
-    padding: 15px 40px;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 2px;      /* Malo oštrije ivice za elegantan izgled */
-    transition: all 0.4s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    display: inline-block;   /* Da padding radi kako treba */
-}
-
-.btn-gold:hover {
-    background: var(--light-gold);
-    color: #000;
-    transform: translateY(-3px); /* Podigne se malo */
-    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4); /* Zlatna senka */
-}
-
-/* =========================================
-   RESPONSIVE (MOBILNI TELEFONI)
-   ========================================= */
-
-@media (max-width: 768px) {
-    /* 1. Smanjujemo header i logo */
-    .site-header {
-        padding: 15px;
-    }
-    
-    .logo img {
-        height: 55px; /* Manji logo na mobilnom */
-    }
-
-    /* 2. Prilagođavamo Hero sekciju */
-    .hero-section {
-        padding-top: 100px; /* Da tekst ne ode pod meni */
-        align-items: center; /* I dalje centrirano */
-    }
-/* ZAMENI STARI .hero-title OVIM KODOM */
-.hero-title {
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    color: var(--rich-gold);
-    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.9);
-    margin: auto;
-    
-    /* 1. CENTRIRANJE */
-    width: 100%;
-    text-align: left;
-    
-    /* 2. MAGIČNA FORMULA ZA VELIČINU (CLAMP)
-       - Minimum: 3rem (dovoljno veliko za telefon da reči odu jedna ispod druge)
-       - Idealno: 8vw (8% širine ekrana, raste kako raste ekran)
-       - Maksimum: 6rem (za velike monitore) */
-    font-size: clamp(3rem, 8vw, 6rem);
-    
-    /* 3. RAZMAK IZMEĐU REDOVA */
-    line-height: 1.1; 
-    
-    /* 4. KLJUČNO: OVO ZABRANJUJE SEČENJE REČI (nema CREA-TURES) */
-    hyphens: none;
-    -webkit-hyphens: none;
-    -ms-hyphens: none;
-    
-    /* 5. Dozvoljava prelazak u novi red samo IZMEĐU reči */
-    word-wrap: normal;
-    overflow-wrap: normal;
-}
-
-/* DODAJ OVO ODMAH ISPOD TOGA (SAMO ZA TELEFONE) 
-   Ovo forsira da na telefonu "AMAZING" bude gore, a "CREATURES" dole. */
-@media (max-width: 600px) {
-    .hero-title {
-        font-size: 3.5rem; /* Dovoljno veliko da MORA da pređe u novi red */
-        padding: 0 10px;   /* Da ne udara u ivice ekrana */
-    }
-}
-
-    .hero-content p.lead {
-        padding: 0 10px; /* Da tekst ne dira ivice ekrana */
-        text-align: center;
-    }
-    
-    .btn-gold {
-        width: 80%; /* Široko dugme na telefonu je lakše za kliknuti */
-        padding: 15px 0;
-    }
-}
-
-
-/* ABOUT */
-
-/* ============================= */
-/* ABOUT SECTION – CRNO ZLATNA */
-/* ============================= */
-
-.about-section {
-    background: linear-gradient(
-        180deg,
-        #050505 0%,
-        #0b0b0b 50%,
-        #050505 100%
-    );
-    padding: 100px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-/* suptilna tekstura / luksuzni šum */
-.about-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(
-        rgba(201, 162, 77, 0.08) 1px,
-        transparent 1px
-    );
-    background-size: 80px 80px;
-    opacity: 0.15;
-    pointer-events: none;
-}
-
-/* NASLOVI */
-.about-section h2,
-.about-section h3 {
-    letter-spacing: 2px;
-    font-weight: 600;
-}
-
-.about-section h3 {
-    border-left: 4px solid var(--rich-gold);
-    padding-left: 15px;
-}
-
-/* TEKST */
-.about-content p {
-    color: #d6d6d6;
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 0;
-}
-
-/* ISTAKNUTI TEKST */
-.about-content b {
-    color: var(--rich-gold);
-    font-weight: 600;
-}
-
-/* LISTA IKONICA */
-.about-content .d-flex span {
-    color: #e0e0e0;
-    font-size: 0.95rem;
-}
-
-.about-content i {
-    font-size: 1.1rem;
-}
-
-/* ZLATNI PEČAT – FCI */
-.fci-stamp {
-    position: absolute;
-    top: -30px;
-    right: -30px;
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle at top,
-        #f5dc9c,
-        #c9a24d,
-        #8b6a2a
-    );
-    box-shadow:
-        0 0 20px rgba(201, 162, 77, 0.6),
-        inset 0 0 15px rgba(0, 0, 0, 0.5);
-    z-index: 3;
-}
-
-.stamp-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px dashed rgba(0, 0, 0, 0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.stamp-fci {
-    font-size: 32px;
-    font-weight: 700;
-    color: #000;
-    line-height: 1;
-}
-
-.stamp-no {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000;
-}
-
-.stamp-text {
-    font-size: 10px;
-    letter-spacing: 1px;
-    color: #000;
-    margin-top: 6px;
-}
-
-/* SLIKA */
-.about-image-wrapper {
-    position: relative;
-}
-
-.about-image-wrapper img {
-    border-radius: 12px;
-    box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(201, 162, 77, 0.3);
-}
-
-/* ZLATNI OFFSET OKVIR */
-.about-section .border {
-    border-radius: 12px;
-    opacity: 0.9;
-}
-
-/* ANIMACIJA (ako već koristiš fade-in) */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* RESPONSIVE */
-@media (max-width: 991px) {
-    .about-section {
-        padding: 70px 0;
-    }
-
-    .fci-stamp {
-        width: 110px;
-        height: 110px;
-        top: -20px;
-        right: -20px;
-    }
-
-    .stamp-fci {
-        font-size: 26px;
-    }
-}
-
-
-
-/* ============================= */
-/* POODLES SECTION – CRNO ZLATNA */
-/* ============================= */
-
-.poodles-section {
-    background: linear-gradient(
-        180deg,
-        #050505 0%,
-        #0b0b0b 50%,
-        #050505 100%
-    );
-    padding: 100px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-/* suptilna luksuzna tekstura */
-.poodles-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: linear-gradient(
-        135deg,
-        rgba(201, 162, 77, 0.05) 25%,
-        transparent 25%,
-        transparent 50%,
-        rgba(201, 162, 77, 0.05) 50%,
-        rgba(201, 162, 77, 0.05) 75%,
-        transparent 75%,
-        transparent
-    );
-    background-size: 120px 120px;
-    opacity: 0.08;
-    pointer-events: none;
-}
-
-/* NASLOV */
-.poodles-section .section-title {
-    text-align: center;
-    margin-bottom: 60px;
-    letter-spacing: 3px;
-    font-weight: 600;
-}
-
-/* KARTICA */
-.poodle-card {
-    background: linear-gradient(
-        180deg,
-        #0c0c0c,
-        #080808
-    );
-    border-radius: 14px;
-    overflow: hidden;
-    height: 100%;
-    box-shadow:
-        0 25px 50px rgba(0, 0, 0, 0.8),
-        inset 0 0 0 1px rgba(201, 162, 77, 0.15);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    position: relative;
-}
-
-/* zlatni akcent ivice */
-.poodle-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 14px;
-    border: 1px solid rgba(201, 162, 77, 0.35);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-
-/* HOVER EFEKAT */
-.poodle-card:hover {
-    transform: translateY(-8px);
-    box-shadow:
-        0 35px 70px rgba(0, 0, 0, 0.9),
-        0 0 25px rgba(201, 162, 77, 0.25);
-}
-
-.poodle-card:hover::after {
-    opacity: 1;
-}
-
-/* SLIKA */
-.poodle-img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    filter: brightness(0.9) contrast(1.05);
-    transition: transform 0.6s ease, filter 0.6s ease;
-}
-
-.poodle-card:hover .poodle-img {
-    transform: scale(1.05);
-    filter: brightness(1) contrast(1.1);
-}
-
-/* SADRŽAJ */
-.poodle-card h4 {
-    margin-bottom: 12px;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-}
-
-.poodle-card p {
-    color: #d2d2d2;
-    font-size: 0.95rem;
-    line-height: 1.7;
-}
-
-/* DONJI INFO RED */
-.poodle-card .d-flex span {
-    font-size: 0.85rem;
-    color: #cfcfcf;
-    white-space: nowrap;
-}
-
-.poodle-card .d-flex i {
-    color: var(--rich-gold);
-}
-
-/* STATUS (Dostupno / Rezervacije) */
-.poodle-card .gold-text {
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-/* FADE-IN već postoji – samo usklađujemo */
-.poodles-section .fade-in {
-    transition-delay: 0.1s;
-}
-
-/* RESPONSIVE */
-@media (max-width: 991px) {
-    .poodles-section {
-        padding: 70px 0;
-    }
-
-    .poodle-img {
-        height: 200px;
-    }
-}
-
-@media (max-width: 575px) {
-    .poodle-card {
-        box-shadow:
-            0 20px 40px rgba(0, 0, 0, 0.8),
-            inset 0 0 0 1px rgba(201, 162, 77, 0.2);
-    }
-}
-
-
-/* ============================================
-   PREMIUM CSS GALERIJA - CRNO-ZLATNA PALETA
-   ============================================ */
-
-/* GLOBALNE VARIJABLE */
-:root {
-    --rich-gold: #d4af37;       /* Tvoja zlatna boja */
-    --light-gold: #f4e4a6;      /* Svetlija nijansa za hover */
-    --dark-black: #0a0a0a;      /* Skoro crna pozadina */
-    --text-white: #ffffff;      /* Bela boja teksta */
-    --overlay-dark: rgba(0, 0, 0, 0.7); /* Providna crna za slojeve */
-    --card-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
-    --hover-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
-    --transition-smooth: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-}
-
-/* GALERIJA SEKCIJA */
-.gallery-section {
-    background-color: var(--dark-black);
-    padding: 80px 0;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Dekorativni zlatni detalj */
-.gallery-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        var(--rich-gold) 50%, 
-        transparent 100%);
-}
-
-.gold-text {
-    color: var(--rich-gold);
-    position: relative;
-    display: inline-block;
-}
-
-.section-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: var(--rich-gold);
-    border-radius: 2px;
-}
-
-.text-center {
-    text-align: center;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    opacity: 0.9;
-}
-
-.mb-5 {
-    margin-bottom: 3rem !important;
-}
-
-/* GALERIJA GRID SISTEM */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -10px;
-    margin-left: -10px;
-}
-
-.col-lg-3, .col-md-4, .col-sm-6 {
-    padding: 10px;
-    position: relative;
-    width: 100%;
-}
-
-/* RESPONSIVE KOLONE */
-@media (min-width: 576px) {
-    .col-sm-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-}
-
-@media (min-width: 768px) {
-    .col-md-4 {
-        flex: 0 0 33.333333%;
-        max-width: 33.333333%;
-    }
-}
-
-@media (min-width: 992px) {
-    .col-lg-3 {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
-}
-
-/* GALERIJA KARTICE */
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    margin: 15px 0;
-    background: #111;
-    padding: 8px;
-    box-shadow: var(--card-shadow);
-    transition: var(--transition-smooth);
-    transform-origin: center;
-}
-
-/* Breathing space - margine */
-.gallery-item::before {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    bottom: 4px;
-    border: 1px solid rgba(212, 175, 55, 0.15);
-    border-radius: 8px;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.gallery-img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    display: block;
-    border-radius: 6px;
-    position: relative;
-    z-index: 1;
-    transition: var(--transition-smooth);
-}
-
-/* Suptilni zlatni okvir */
-.gallery-img::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid rgba(212, 175, 55, 0.2);
-    border-radius: 6px;
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* OVERLAY EFEKAT */
-.gallery-overlay {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    background: linear-gradient(
-        to bottom,
-        transparent 40%,
-        rgba(212, 175, 55, 0.1) 70%,
-        rgba(212, 175, 55, 0.15) 100%
-    );
-    border-radius: 6px;
-    opacity: 0;
-    transition: var(--transition-smooth);
-    z-index: 2;
-    pointer-events: none;
-}
-
-/* HOVER EFEKTI */
-.gallery-item:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--hover-shadow);
-}
-
-.gallery-item:hover .gallery-img {
-    transform: scale(1.08);
-    filter: brightness(1.1) saturate(1.2);
-}
-
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-    background: linear-gradient(
-        to bottom,
-        transparent 30%,
-        rgba(212, 175, 55, 0.2) 60%,
-        rgba(212, 175, 55, 0.3) 100%
-    );
-}
-
-/* Zlatni sjaj efekat */
-.gallery-item:hover::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-        circle at center,
-        rgba(244, 228, 166, 0.1) 0%,
-        transparent 70%
-    );
-    border-radius: 12px;
-    z-index: 3;
-    pointer-events: none;
-    animation: goldGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes goldGlow {
-    0% {
-        opacity: 0.4;
-    }
-    100% {
-        opacity: 0.8;
-    }
-}
-
-/* FADE IN ANIMACIJA */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.8s ease forwards;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* STAGGER ANIMACIJA ZA KARTICE */
-.row > div:nth-child(1) { animation-delay: 0.1s; }
-.row > div:nth-child(2) { animation-delay: 0.2s; }
-.row > div:nth-child(3) { animation-delay: 0.3s; }
-.row > div:nth-child(4) { animation-delay: 0.4s; }
-.row > div:nth-child(5) { animation-delay: 0.5s; }
-.row > div:nth-child(6) { animation-delay: 0.6s; }
-.row > div:nth-child(7) { animation-delay: 0.7s; }
-.row > div:nth-child(8) { animation-delay: 0.8s; }
-.row > div:nth-child(9) { animation-delay: 0.9s; }
-.row > div:nth-child(10) { animation-delay: 1s; }
-.row > div:nth-child(11) { animation-delay: 1.1s; }
-.row > div:nth-child(12) { animation-delay: 1.2s; }
-.row > div:nth-child(13) { animation-delay: 1.3s; }
-.row > div:nth-child(14) { animation-delay: 1.4s; }
-.row > div:nth-child(15) { animation-delay: 1.5s; }
-.row > div:nth-child(16) { animation-delay: 1.6s; }
-
-/* MOBILNI RESPONSIVE */
-@media (max-width: 767.98px) {
-    .gallery-section {
-        padding: 50px 0;
-    }
-    
-    .section-title {
-        font-size: 2.2rem;
-    }
-    
-    .gallery-img {
-        height: 220px;
-    }
-    
-    .gallery-item {
-        margin: 10px 0;
-    }
-    
-    .row {
-        margin-right: -8px;
-        margin-left: -8px;
-    }
-    
-    .col-sm-6 {
-        padding: 8px;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .gallery-img {
-        height: 180px;
-    }
-    
-    .col-sm-6 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    .gallery-item:hover {
-        transform: translateY(-5px) scale(1.01);
-    }
-}
-
-/* TAMNI MODE OTPORNOST */
-@media (prefers-color-scheme: dark) {
-    .gallery-section {
-        background-color: #050505;
-    }
-}
-
-/* PERFORMANSE OPTIMIZACIJA */
-.gallery-img {
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-}
-
-/* SMOOTH SCROLL */
-html {
-    scroll-behavior: smooth;
-}
-
-/* PRINT STILOVI */
-@media print {
-    .gallery-item {
-        break-inside: avoid;
-        box-shadow: none !important;
-        border: 1px solid #ddd !important;
-    }
-    
-    .gallery-section {
-        padding: 20px 0 !important;
-    }
-}
-
-
-/* ============================================
-   PREMIUM FOOTER CSS - CRNO-ZLATNA PALETA
-   ============================================ */
-
-/* FOOTER GLAVNI STILOVI */
-.footer {
-    background: linear-gradient(
-        180deg,
-        var(--dark-black) 0%,
-        #050505 30%,
-        #000000 100%
-    );
-    padding: 80px 0 30px;
-    position: relative;
-    overflow: hidden;
-    border-top: 1px solid rgba(212, 175, 55, 0.15);
-}
-
-/* Zlatni ornament na vrhu footera */
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--rich-gold),
-        transparent
-    );
-    opacity: 0.6;
-}
-
-/* Footer grid sistem */
-.footer .container {
-    position: relative;
-    z-index: 2;
-}
-
-.footer .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.footer .col-lg-4 {
-    padding: 0 15px;
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
-}
-
-.mb-4 {
-    margin-bottom: 1.5rem !important;
-}
-
-.mb-3 {
-    margin-bottom: 1rem !important;
-}
-
-.mb-2 {
-    margin-bottom: 0.5rem !important;
-}
-
-/* LOGO SEKCJA */
-.footer-logo {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--rich-gold);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-left: 15px;
-}
-
-.footer-logo::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 40px;
-    background: var(--rich-gold);
-    border-radius: 2px;
-}
-
-.footer-logo i {
-    font-size: 2.2rem;
-    animation: crownGlow 3s ease-in-out infinite;
-}
-
-@keyframes crownGlow {
-    0%, 100% {
-        transform: translateY(0);
-        filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
-    }
-    50% {
-        transform: translateY(-5px);
-        filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
-    }
-}
-
-/* TEKST STILOVI */
-.footer p {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.7;
-    font-size: 1rem;
-    margin-bottom: 1.2rem;
-    transition: color 0.3s ease;
-}
-
-.footer p.gold-text {
-    color: var(--light-gold);
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 8px 15px;
-    background: rgba(212, 175, 55, 0.08);
-    border-left: 3px solid var(--rich-gold);
-    border-radius: 0 4px 4px 0;
-}
-
-/* NASLOVI SEKCIJA */
-.footer h5 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    padding-bottom: 10px;
-    margin-bottom: 1.5rem;
-}
-
-.footer h5::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 2px;
-    background: var(--rich-gold);
-    border-radius: 1px;
-}
-
-/* KONTAKT INFORMACIJE */
-.footer .mb-2 {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
-
-.footer .mb-2:hover {
-    transform: translateX(5px);
-    border-bottom-color: rgba(212, 175, 55, 0.3);
-}
-
-.footer .mb-2 i {
-    width: 24px;
-    text-align: center;
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-.footer .mb-2:hover i {
-    transform: scale(1.2);
-}
-
-.footer .mb-2 span {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
-
-.footer .mb-2:hover span {
-    color: var(--light-gold);
-}
-
-/* SOCIJALNE MREŽE */
-.d-flex {
-    display: flex !important;
-}
-
-.me-3 {
-    margin-right: 1rem !important;
-}
-
-.social-icon {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
-}
-
-.social-icon::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(212, 175, 55, 0.1) 50%,
-        transparent 70%
-    );
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.social-icon:hover {
-    transform: translateY(-5px) scale(1.1);
-    background: rgba(212, 175, 55, 0.1);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
-}
-
-.social-icon:hover::before {
-    opacity: 1;
-    animation: socialShine 1s ease-in-out;
-}
-
-@keyframes socialShine {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
-
-.social-icon i {
-    position: relative;
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-.social-icon:hover i {
-    color: var(--light-gold) !important;
-    transform: scale(1.1);
-}
-
-/* COPYRIGHT TEKST */
-.text-muted {
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
-.small {
-    font-size: 0.875rem;
-}
-
-.mt-3 {
-    margin-top: 1rem !important;
-}
-
-/* FOOTER DIVIDER */
-.footer-divider {
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(212, 175, 55, 0.3) 50%,
-        transparent 100%
-    );
-    margin: 50px 0 30px;
-    position: relative;
-}
-
-.footer-divider::before,
-.footer-divider::after {
-    content: '✦';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--rich-gold);
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
-
-.footer-divider::before {
-    left: 45%;
-    margin-left: -40px;
-}
-
-.footer-divider::after {
-    right: 45%;
-    margin-right: -40px;
-}
-
-/* FOOTER BOTTOM TEKST */
-.text-center {
-    text-align: center !important;
-}
-
-.text-center p {
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-/* BACK TO TOP BUTTON */
-.back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: rgba(10, 10, 10, 0.9);
-    border: 2px solid var(--rich-gold);
-    border-radius: 50%;
-    color: var(--rich-gold);
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
-}
-
-.back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.back-to-top:hover {
-    background: var(--rich-gold);
-    color: var(--dark-black);
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-}
-
-.back-to-top:active {
-    transform: translateY(-2px) scale(1.05);
-}
-
-/* LIGHTBOX MODAL - FOOTER SPECIFIČNO */
-.lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    backdrop-filter: blur(10px);
-}
-
-.lightbox.active {
-    display: flex;
-    opacity: 1;
-}
-
-.close-lightbox {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    color: var(--rich-gold);
-    font-size: 3rem;
-    cursor: pointer;
-    z-index: 2001;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-.close-lightbox:hover {
-    color: var(--light-gold);
-    background: rgba(212, 175, 55, 0.1);
-    transform: rotate(90deg);
-}
-
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(212, 175, 55, 0.1);
-    color: var(--rich-gold);
-    border: none;
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 2001;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-}
-
-.nav-btn:hover {
-    background: var(--rich-gold);
-    color: var(--dark-black);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.prev-btn {
-    left: 30px;
-}
-
-.next-btn {
-    right: 30px;
-}
-
-.lightbox-content {
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-}
-
-#modal-img {
-    max-width: 100%;
-    max-height: 80vh;
-    border-radius: 8px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    border: 2px solid rgba(212, 175, 55, 0.3);
-}
-
-#modal-caption {
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 1.1rem;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 4px;
-    margin-top: 10px;
-    border-left: 3px solid var(--rich-gold);
-}
-
-/* RESPONSIVE STILOVI */
-@media (max-width: 991.98px) {
-    .footer {
-        padding: 60px 0 25px;
-    }
-    
-    .footer .col-lg-4 {
-        flex: 0 0 50%;
-        max-width: 50%;
-        margin-bottom: 2.5rem;
-    }
-    
-    .footer-logo {
-        font-size: 1.8rem;
-    }
-    
-    .footer h5 {
-        font-size: 1.3rem;
-    }
-}
-
-@media (max-width: 767.98px) {
-    .footer {
-        padding: 50px 0 20px;
-    }
-    
-    .footer .col-lg-4 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    
-    .footer-logo {
-        font-size: 1.6rem;
-        justify-content: center;
-        padding-left: 0;
-    }
-    
-    .footer-logo::before {
-        display: none;
-    }
-    
-    .text-center p {
-        padding: 0 15px;
-    }
-    
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1rem;
-    }
-    
-    .close-lightbox {
-        top: 20px;
-        right: 20px;
-        font-size: 2.5rem;
-        width: 40px;
-        height: 40px;
-    }
-    
-    .nav-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-    }
-    
-    .prev-btn {
-        left: 15px;
-    }
-    
-    .next-btn {
-        right: 15px;
-    }
-}
-
-@media (max-width: 575.98px) {
-    .footer {
-        padding: 40px 0 15px;
-    }
-    
-    .footer p {
-        font-size: 0.95rem;
-    }
-    
-    .social-icon {
-        width: 45px;
-        height: 45px;
-    }
-    
-    .footer-divider::before,
-    .footer-divider::after {
-        display: none;
-    }
-}
-
-/* ANIMACIJA ZA SCROLL TRIGGER */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.footer .row > div {
-    animation: fadeInUp 0.8s ease forwards;
-}
-
-.footer .row > div:nth-child(1) { animation-delay: 0.1s; }
-.footer .row > div:nth-child(2) { animation-delay: 0.2s; }
-.footer .row > div:nth-child(3) { animation-delay: 0.3s; }
-
-/* DODAJ OVAJ JS ZA BACK TO TOP FUNKCIONALNOST */
-
-
-
-
-
-
-
-
-
-/* ================================================
-   PREMIUM ANIMATION CSS
-   ================================================ */
-
-/* Page states */
-.page-loading {
-    opacity: 0;
-}
-
-.page-ready {
-    opacity: 1;
-    transition: opacity 0.3s ease-out;
-}
-
-.page-loaded {
-    opacity: 1 !important;
-}
-
-/* Navbar animations */
-.navbar-entering {
-    transform: translateY(-100%);
-    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.navbar-visible {
-    transform: translateY(0);
-}
-
-.navbar-scrolled {
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
-}
-
-/* Letter animation */
-.letter-animation {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: letterDrop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: calc(var(--letter-index, 0) * 0.05s);
-}
-
-@keyframes letterDrop {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Stagger animation */
-.stagger-animation {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.6s ease-out forwards;
-    animation-delay: calc(var(--stagger-index, 0) * 0.2s + 0.8s);
-}
-
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Gold wave effect */
-.gold-wave-effect {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(212, 175, 55, 0.1),
-        rgba(212, 175, 55, 0.15),
-        rgba(212, 175, 55, 0.1),
-        transparent
-    );
-    pointer-events: none;
-    z-index: 1;
-    transform: translateX(-100%);
-    animation: waveFlow 2s ease-out;
-}
-
-@keyframes waveFlow {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    50% {
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-
-/* Scroll indicator */
-.scroll-indicator {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 50px;
-    border: 2px solid var(--rich-gold);
-    border-radius: 15px;
-    opacity: 0;
-    animation: fadeInScroll 1s ease-out 2s forwards;
-}
-
-.scroll-indicator-dot {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background: var(--rich-gold);
-    border-radius: 50%;
-    animation: scrollBounce 2s infinite 2.5s;
-}
-
-.scroll-indicator.fading-out {
-    opacity: 0 !important;
-    transition: opacity 0.5s ease-out;
-}
-
-@keyframes fadeInScroll {
-    to { opacity: 0.7; }
-}
-
-@keyframes scrollBounce {
-    0%, 100% {
-        transform: translateX(-50%) translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(-50%) translateY(20px);
-        opacity: 0.5;
-    }
-}
-
-/* Gallery entrance */
-.gallery-item-entering {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: galleryItemEntrance 0.8s ease-out forwards;
-    animation-delay: calc(var(--gallery-index, 0) * 0.15s);
-}
-
-@keyframes galleryItemEntrance {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Fade in on scroll */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in.in-view {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Loading screen */
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--dark-black);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-}
-
-.loading-screen.loaded {
-    opacity: 0;
-    visibility: hidden;
-}
-
-/* Lightbox states */
-.lightbox-open {
-    overflow: hidden;
-}
-
-#lightbox-modal {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-#lightbox-modal.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Back to top button */
-.back-to-top {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    pointer-events: none;
-}
-
-.back-to-top.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-/* Animation fallback (if JS fails) */
-.animation-fallback .fade-in,
-.animation-fallback .gallery-item,
-.animation-fallback .hero-title span {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-}
-
-
+        1. GLOBALNE PROMENLJIVE I RESET
+        ========================================= */
+
+        :root {
+            --rich-gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --dark-black: #0a0a0a;
+            --text-white: #ffffff;
+            --overlay-dark: rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--rich-gold);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gold-text {
+            color: var(--rich-gold) !important;
+        }
+
+        /* =========================================
+        2. HEADER & NAVIGACIJA (PREMIUM STIL - ISPRAVLJENO)
+        ========================================= */
+
+        .site-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            transition: all 0.3s ease;
+        }
+
+        .site-header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            color: var(--rich-gold);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-left: 10px;
+            letter-spacing: 1px;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Stil za HAMBURGER DUGME */
+        .hamburger-menu {
+            background: transparent;
+            border: 1px solid var(--rich-gold);
+            padding: 10px 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            z-index: 1001;
+        }
+
+        .hamburger-menu span {
+            width: 30px;
+            height: 2px;
+            background-color: var(--rich-gold);
+            display: block;
+            transition: 0.3s;
+        }
+
+        .hamburger-menu:hover {
+            background: rgba(212, 175, 55, 0.15);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* NAV OVERLAY (Meni preko celog ekrana) */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(5, 5, 5, 0.98);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            transition: right 0.5s ease;
+        }
+
+        .nav-overlay.active {
+            right: 0;
+        }
+
+        .nav-overlay ul {
+            text-align: center;
+        }
+
+        .nav-overlay li {
+            margin: 25px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .nav-overlay.active li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-overlay li:nth-child(1) { transition-delay: 0.1s; }
+        .nav-overlay li:nth-child(2) { transition-delay: 0.2s; }
+        .nav-overlay li:nth-child(3) { transition-delay: 0.3s; }
+        .nav-overlay li:nth-child(4) { transition-delay: 0.4s; }
+
+        .nav-overlay a {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--text-white);
+            display: block;
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-overlay a:hover {
+            color: var(--rich-gold);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+
+        .nav-overlay a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--rich-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-overlay a:hover::after {
+            width: 100%;
+        }
+
+        /* =========================================
+        3. HERO SEKCIJA (CENTAR PAŽNJE - ISPRAVLJENO)
+        ========================================= */
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(rgba(17, 17, 17, 0.8), rgba(26, 26, 26, 0.9)), url('assets/gallery/banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        /* Animacije za naslov */
+        .title-animation-wrapper {
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--text-white);
+            margin-bottom: 0;
+            font-family: 'Cinzel', serif;
+        }
+
+        .title-part {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title-part:nth-child(1) {
+            color: var(--text-white);
+        }
+
+        .title-part:nth-child(2) {
+            color: var(--rich-gold);
+            margin-top: -5px;
+        }
+
+        /* Tekst sa animacijom */
+        .text-animation-wrapper {
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .hero-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--light-gold);
+            max-width: 700px;
+            margin: 0 auto 25px;
+            text-shadow: 1px 1px 3px rgba(0,0,0, 0.9);
+        }
+
+        .highlight {
+            color: var(--rich-gold);
+            font-weight: 600;
+        }
+
+        /* Divider sa animacijom */
+        .divider-animation-wrapper {
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .hero-divider {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--rich-gold), transparent);
+            margin: 0 auto;
+            box-shadow: 0 0 10px var(--rich-gold);
+        }
+
+        /* Subtitle sa animacijom */
+        .subtitle-animation-wrapper {
+            overflow: hidden;
+            margin-bottom: 35px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            color: var(--rich-gold);
+            font-weight: 600;
+        }
+
+        /* Button sa animacijom */
+        .button-animation-wrapper {
+            overflow: hidden;
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, var(--rich-gold), var(--light-gold));
+            color: var(--dark-black);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+            color: var(--dark-black);
+        }
+
+        .btn-gold:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-gold i {
+            font-size: 1.2rem;
+        }
+
+        /* Gold wave efekat */
+        .gold-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23D4AF37"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35,6.36,119.13-6.25C939.06,29.08,1078.14,14.86,1200,52.47V0Z" opacity=".5" fill="%23D4AF37"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23D4AF37"/></svg>');
+            background-size: 1200px 100px;
+            z-index: 1;
+        }
+
+        /* Animacije za elemente hero sekcije */
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .title-animation-wrapper .title-part {
+            animation: slideUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .title-animation-wrapper .title-part:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .title-animation-wrapper .title-part:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .text-animation-wrapper .hero-text {
+            animation: slideUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .divider-animation-wrapper .hero-divider {
+            animation: slideUp 0.8s ease 0.8s forwards;
+            opacity: 0;
+        }
+
+        .subtitle-animation-wrapper .hero-subtitle {
+            animation: slideUp 0.8s ease 1s forwards;
+            opacity: 0;
+        }
+
+        .button-animation-wrapper .btn-gold {
+            animation: slideUp 0.8s ease 1.2s forwards;
+            opacity: 0;
+        }
+
+        /* =========================================
+        RESPONSIVE STILOVI
+        ========================================= */
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.2rem;
+            }
+            
+            .hero-text {
+                font-size: 1.1rem;
+            }
+            
+            .nav-overlay a {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .site-header {
+                padding: 15px 20px;
+            }
+            
+            .site-header.scrolled {
+                padding: 12px 20px;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text {
+                font-size: 1rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .btn-gold {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .nav-overlay a {
+                font-size: 1.5rem;
+            }
+            
+            .gold-wave {
+                height: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-text {
+                font-size: 0.95rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .btn-gold {
+                padding: 10px 25px;
+                font-size: 0.95rem;
+            }
+            
+            .nav-overlay a {
+                font-size: 1.3rem;
+            }
+            
+            .gold-wave {
+                height: 50px;
+            }
+            
+            .logo-text {
+                display: none;
+            }
+        }
+
+        /* ABOUT SEKCIJA - Ostalo nepromenjeno */
+        .about-section {
+            background: linear-gradient(
+                180deg,
+                #050505 0%,
+                #0b0b0b 50%,
+                #050505 100%
+            );
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(
+                rgba(201, 162, 77, 0.08) 1px,
+                transparent 1px
+            );
+            background-size: 80px 80px;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .about-section h2,
+        .about-section h3 {
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .about-section h3 {
+            border-left: 4px solid var(--rich-gold);
+            padding-left: 15px;
+        }
+
+        .about-content p {
+            color: #d6d6d6;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 0;
+        }
+
+        .about-content b {
+            color: var(--rich-gold);
+            font-weight: 600;
+        }
+
+        .about-content .d-flex span {
+            color: #e0e0e0;
+            font-size: 0.95rem;
+        }
+
+        .about-content i {
+            font-size: 1.1rem;
+        }
+
+        .fci-stamp {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at top,
+                #f5dc9c,
+                #c9a24d,
+                #8b6a2a
+            );
+            box-shadow:
+                0 0 20px rgba(201, 162, 77, 0.6),
+                inset 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 3;
+        }
+
+        .stamp-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stamp-fci {
+            font-size: 32px;
+            font-weight: 700;
+            color: #000;
+            line-height: 1;
+        }
+
+        .stamp-no {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .stamp-text {
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: #000;
+            margin-top: 6px;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+        }
+
+        .about-image-wrapper img {
+            border-radius: 12px;
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.8),
+                0 0 0 1px rgba(201, 162, 77, 0.3);
+        }
+
+        .about-section .border {
+            border-radius: 12px;
+            opacity: 0.9;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 991px) {
+            .about-section {
+                padding: 70px 0;
+            }
+
+            .fci-stamp {
+                width: 110px;
+                height: 110px;
+                top: -20px;
+                right: -20px;
+            }
+
+            .stamp-fci {
+                font-size: 26px;
+            }
+        }
+
+        /* POODLES SEKCIJA - Ostalo nepromenjeno */
+        .poodles-section {
+            background: linear-gradient(
+                180deg,
+                #050505 0%,
+                #0b0b0b 50%,
+                #050505 100%
+            );
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .poodles-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(
+                135deg,
+                rgba(201, 162, 77, 0.05) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(201, 162, 77, 0.05) 50%,
+                rgba(201, 162, 77, 0.05) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 120px 120px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .poodles-section .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .poodle-card {
+            background: linear-gradient(
+                180deg,
+                #0c0c0c,
+                #080808
+            );
+            border-radius: 14px;
+            overflow: hidden;
+            height: 100%;
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.8),
+                inset 0 0 0 1px rgba(201, 162, 77, 0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+        }
+
+        .poodle-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            border: 1px solid rgba(201, 162, 77, 0.35);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .poodle-card:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                0 35px 70px rgba(0, 0, 0, 0.9),
+                0 0 25px rgba(201, 162, 77, 0.25);
+        }
+
+        .poodle-card:hover::after {
+            opacity: 1;
+        }
+
+        .poodle-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            filter: brightness(0.9) contrast(1.05);
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .poodle-card:hover .poodle-img {
+            transform: scale(1.05);
+            filter: brightness(1) contrast(1.1);
+        }
+
+        .poodle-card h4 {
+            margin-bottom: 12px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .poodle-card p {
+            color: #d2d2d2;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .poodle-card .d-flex span {
+            font-size: 0.85rem;
+            color: #cfcfcf;
+            white-space: nowrap;
+        }
+
+        .poodle-card .d-flex i {
+            color: var(--rich-gold);
+        }
+
+        .poodle-card .gold-text {
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .poodles-section .fade-in {
+            transition-delay: 0.1s;
+        }
+
+        @media (max-width: 991px) {
+            .poodles-section {
+                padding: 70px 0;
+            }
+
+            .poodle-img {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .poodle-card {
+                box-shadow:
+                    0 20px 40px rgba(0, 0, 0, 0.8),
+                    inset 0 0 0 1px rgba(201, 162, 77, 0.2);
+            }
+        }
+
+        /* GALERIJA SEKCIJA - Ostalo nepromenjeno */
+        .gallery-section {
+            background-color: var(--dark-black);
+            padding: 80px 0;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--rich-gold) 50%, 
+                transparent 100%);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--rich-gold);
+            border-radius: 2px;
+        }
+
+        .text-center {
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .mb-5 {
+            margin-bottom: 3rem !important;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -10px;
+            margin-left: -10px;
+        }
+
+        .col-lg-3, .col-md-4, .col-sm-6 {
+            padding: 10px;
+            position: relative;
+            width: 100%;
+        }
+
+        @media (min-width: 576px) {
+            .col-sm-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .col-md-4 {
+                flex: 0 0 33.333333%;
+                max-width: 33.333333%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 15px 0;
+            background: #111;
+            padding: 8px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            transform-origin: center;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            border-radius: 6px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        .gallery-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            background: linear-gradient(
+                to bottom,
+                transparent 40%,
+                rgba(212, 175, 55, 0.1) 70%,
+                rgba(212, 175, 55, 0.15) 100%
+            );
+            border-radius: 6px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.08);
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            background: linear-gradient(
+                to bottom,
+                transparent 30%,
+                rgba(212, 175, 55, 0.2) 60%,
+                rgba(212, 175, 55, 0.3) 100%
+            );
+        }
+
+        @keyframes goldGlow {
+            0% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        .gallery-item:hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(244, 228, 166, 0.1) 0%,
+                transparent 70%
+            );
+            border-radius: 12px;
+            z-index: 3;
+            pointer-events: none;
+            animation: goldGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .row > div:nth-child(1) { animation-delay: 0.1s; }
+        .row > div:nth-child(2) { animation-delay: 0.2s; }
+        .row > div:nth-child(3) { animation-delay: 0.3s; }
+        .row > div:nth-child(4) { animation-delay: 0.4s; }
+        .row > div:nth-child(5) { animation-delay: 0.5s; }
+        .row > div:nth-child(6) { animation-delay: 0.6s; }
+        .row > div:nth-child(7) { animation-delay: 0.7s; }
+        .row > div:nth-child(8) { animation-delay: 0.8s; }
+        .row > div:nth-child(9) { animation-delay: 0.9s; }
+        .row > div:nth-child(10) { animation-delay: 1s; }
+        .row > div:nth-child(11) { animation-delay: 1.1s; }
+        .row > div:nth-child(12) { animation-delay: 1.2s; }
+        .row > div:nth-child(13) { animation-delay: 1.3s; }
+        .row > div:nth-child(14) { animation-delay: 1.4s; }
+        .row > div:nth-child(15) { animation-delay: 1.5s; }
+        .row > div:nth-child(16) { animation-delay: 1.6s; }
+
+        @media (max-width: 767.98px) {
+            .gallery-section {
+                padding: 50px 0;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .gallery-img {
+                height: 220px;
+            }
+            
+            .gallery-item {
+                margin: 10px 0;
+            }
+            
+            .row {
+                margin-right: -8px;
+                margin-left: -8px;
+            }
+            
+            .col-sm-6 {
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-img {
+                height: 180px;
+            }
+            
+            .col-sm-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            
+            .gallery-item:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .gallery-section {
+                background-color: #050505;
+            }
+        }
+
+        .gallery-img {
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        /* FOOTER - Ostalo nepromenjeno */
+        .footer {
+            background: linear-gradient(
+                180deg,
+                var(--dark-black) 0%,
+                #050505 30%,
+                #000000 100%
+            );
+            padding: 80px 0 30px;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--rich-gold),
+                transparent
+            );
+            opacity: 0.6;
+        }
+
+        .footer .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .footer .col-lg-4 {
+            padding: 0 15px;
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem !important;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem !important;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rich-gold);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .footer-logo::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 40px;
+            background: var(--rich-gold);
+            border-radius: 2px;
+        }
+
+        .footer-logo i {
+            font-size: 2.2rem;
+            animation: crownGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes crownGlow {
+            0%, 100% {
+                transform: translateY(0);
+                filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));
+            }
+            50% {
+                transform: translateY(-5px);
+                filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.6));
+            }
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer p.gold-text {
+            color: var(--light-gold);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            background: rgba(212, 175, 55, 0.08);
+            border-left: 3px solid var(--rich-gold);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .footer h5 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--rich-gold);
+            border-radius: 1px;
+        }
+
+        .footer .mb-2 {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .footer .mb-2:hover {
+            transform: translateX(5px);
+            border-bottom-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .footer .mb-2 i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .footer .mb-2:hover i {
+            transform: scale(1.2);
+        }
+
+        .footer .mb-2 span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer .mb-2:hover span {
+            color: var(--light-gold);
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .me-3 {
+            margin-right: 1rem !important;
+        }
+
+        .social-icon {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(212, 175, 55, 0.1) 50%,
+                transparent 70%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .social-icon:hover::before {
+            opacity: 1;
+            animation: socialShine 1s ease-in-out;
+        }
+
+        @keyframes socialShine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .social-icon i {
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover i {
+            color: var(--light-gold) !important;
+            transform: scale(1.1);
+        }
+
+        .text-muted {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        .small {
+            font-size: 0.875rem;
+        }
+
+        .mt-3 {
+            margin-top: 1rem !important;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(212, 175, 55, 0.3) 50%,
+                transparent 100%
+            );
+            margin: 50px 0 30px;
+            position: relative;
+        }
+
+        .footer-divider::before,
+        .footer-divider::after {
+            content: '✦';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--rich-gold);
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .footer-divider::before {
+            left: 45%;
+            margin-left: -40px;
+        }
+
+        .footer-divider::after {
+            right: 45%;
+            margin-right: -40px;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+        .text-center p {
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 2px solid var(--rich-gold);
+            border-radius: 50%;
+            color: var(--rich-gold);
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--rich-gold);
+            color: var(--dark-black);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .back-to-top:active {
+            transform: translateY(-2px) scale(1.05);
+        }
+
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: var(--rich-gold);
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 2001;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .close-lightbox:hover {
+            color: var(--light-gold);
+            background: rgba(212, 175, 55, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--rich-gold);
+            border: none;
+            width: 60px;
+            height: 60px;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: var(--rich-gold);
+            color: var(--dark-black);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn {
+            left: 30px;
+        }
+
+        .next-btn {
+            right: 30px;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        #modal-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        #modal-caption {
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 4px;
+            margin-top: 10px;
+            border-left: 3px solid var(--rich-gold);
+        }
+
+        @media (max-width: 991.98px) {
+            .footer {
+                padding: 60px 0 25px;
+            }
+            
+            .footer .col-lg-4 {
+                flex: 0 0 50%;
+                max-width: 50%;
+                margin-bottom: 2.5rem;
+            }
+            
+            .footer-logo {
+                font-size: 1.8rem;
+            }
+            
+            .footer h5 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .footer {
+                padding: 50px 0 20px;
+            }
+            
+            .footer .col-lg-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            
+            .footer-logo {
+                font-size: 1.6rem;
+                justify-content: center;
+                padding-left: 0;
+            }
+            
+            .footer-logo::before {
+                display: none;
+            }
+            
+            .text-center p {
+                padding: 0 15px;
+            }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+            
+            .close-lightbox {
+                top: 20px;
+                right: 20px;
+                font-size: 2.5rem;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .prev-btn {
+                left: 15px;
+            }
+            
+            .next-btn {
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .footer {
+                padding: 40px 0 15px;
+            }
+            
+            .footer p {
+                font-size: 0.95rem;
+            }
+            
+            .social-icon {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .footer-divider::before,
+            .footer-divider::after {
+                display: none;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer .row > div {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .footer .row > div:nth-child(1) { animation-delay: 0.1s; }
+        .footer .row > div:nth-child(2) { animation-delay: 0.2s; }
+        .footer .row > div:nth-child(3) { animation-delay: 0.3s; }
     </style>
 </head>
 
@@ -1857,12 +1696,16 @@ html {
     <header class="site-header">
         <div class="nav-left">
             <a href="index.html" class="logo">
-                <img src="assets/gallery/izlaz.png" alt="amazing-creatures">
+                <!-- Logo -->
+                <div class="logo-img">
+            <img src="assets/gallery/izlaz.png" alt="Amazing Creatures Logo" class="logo-img">
+                </div>
+                <span class="logo-text">AMAZING CREATURES</span>
             </a>
         </div>
 
         <div class="nav-right">
-            <button class="menu-toggle" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-label="Toggle menu">
+            <button class="hamburger-menu" id="menuToggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -1870,7 +1713,8 @@ html {
         </div>
     </header>
 
-    <div class="collapse nav-overlay" id="navMenu">
+    <!-- Navigacioni overlay -->
+    <div class="nav-overlay" id="navOverlay">
         <ul>
             <li><a href="#home">Početna</a></li>
             <li><a href="#about">O nama</a></li>
@@ -1879,47 +1723,47 @@ html {
         </ul>
     </div>
 
-    <!-- Hero Section (OSTAJE NE PROMENJENO) -->
+    <!-- Hero Section -->
     <section id="home" class="hero-section">
-    <div class="gold-wave"></div>
-    <div class="container hero-content">
-        
-        <!-- ANIMIRANI TITLE -->
-        <div class="title-animation-wrapper">
-         <h3 class="hero-title">
-                <span class="word amazing-word">AMAZING</span>
-                <span class="word creatures-word">CREATURES</span>
-            </h3>
+        <div class="gold-wave"></div>
+        <div class="container hero-content">
+            
+            <!-- ANIMIRANI NASLOV -->
+            <div class="title-animation-wrapper">
+                <h1 class="hero-title">
+                    <span class="title-part">AMAZING</span>
+                    <span class="title-part">CREATURES</span>
+                </h1>
+            </div>
+            
+            <!-- TEKST SA ANIMACIJOM -->
+            <div class="text-animation-wrapper">
+                <p class="hero-text">
+                    Dobrodošli u odgajivačnicu <span class="highlight">Amazing Creatures</span>.
+                    Ako tražite pudlu koja je pametna, vesela i puna ljubavi, na pravom ste mestu. 
+                    Upoznajte naše štence, odgajane s pažnjom i ljubavlju, postanite deo porodice Amazing Creatures.
+                </p>
+            </div>
+            
+            <!-- DIVIDER SA ANIMACIJOM -->
+            <div class="divider-animation-wrapper">
+                <div class="hero-divider"></div>
+            </div>
+            
+            <!-- SUBTITLE SA ANIMACIJOM -->
+            <div class="subtitle-animation-wrapper">
+                <p class="hero-subtitle">FCI 7364</p>
+            </div>
+            
+            <!-- BUTTON SA ANIMACIJOM -->
+            <div class="button-animation-wrapper">
+                <a href="#about" class="btn-gold">
+                    <i class="fas fa-paw me-2"></i>Otkrijte naš svet
+                </a>
+            </div>
+            
         </div>
-        
-        <!-- TEKST SA ANIMACIJOM -->
-        <div class="text-animation-wrapper">
-            <p class="lead mb-4">
-                Dobrodošli u odgajivačnicu <span class="highlight">Amazing Creatures</span>.
-                Ako tražite pudlu koja je pametna, vesela i puna ljubavi, na pravom ste mestu. 
-                Upoznajte naše štence, odgajane s pažnjom i ljubavlju, postanite deo porodice Amazing Creatures.
-            </p>
-        </div>
-        
-        <!-- DIVIDER SA ANIMACIJOM -->
-        <div class="divider-animation-wrapper">
-            <div class="hero-divider"></div>
-        </div>
-        
-        <!-- SUBTITLE SA ANIMACIJOM -->
-        <div class="subtitle-animation-wrapper">
-            <p class="hero-subtitle gold-text">FCI 7364</p>
-        </div>
-        
-        <!-- BUTTON SA ANIMACIJOM -->
-        <div class="button-animation-wrapper">
-            <a href="#about" class="btn btn-gold">
-                <i class="fas fa-paw me-2"></i>Otkrijte naš svet
-            </a>
-        </div>
-        
-    </div>
-</section>
+    </section>
 
     <!-- About Us Section -->
     <section id="about" class="about-section">
@@ -2278,672 +2122,175 @@ html {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // ================================================
-// PREMIUM ANIMATION ENGINE - AMAZING CREATURES
-// ================================================
-
-'use strict';
-
-(function() {
-    // ================================================
-    // CONFIGURATION & CONSTANTS
-    // ================================================
-    const CONFIG = {
-        animation: {
-            duration: {
-                pageFade: 300,
-                navbarSlide: 800,
-                letterDrop: 500,
-                heroStagger: 600,
-                waveFlow: 2000,
-                scrollBounce: 2000
-            },
-            easing: {
-                bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                smooth: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                linear: 'ease-out'
-            }
-        },
-        thresholds: {
-            navbarScroll: 50,
-            backToTop: 300,
-            fadeIn: 150,
-            scrollIndicator: 100
-        },
-        selectors: {
-            navbar: '.site-header',
-            backToTop: '.back-to-top',
-            heroTitle: '.hero-title',
-            heroSection: '.hero-section',
-            fadeElements: '.fade-in',
-            galleryItems: '.gallery-item',
-            galleryImages: '.gallery-img',
-            lightboxModal: '#lightbox-modal',
-            navMenu: '#navMenu',
-            loadingScreen: '.loading-screen'
-        },
-        colors: {
-            gold: '#d4af37',
-            lightGold: '#f4e4a6'
-        }
-    };
-
-    // ================================================
-    // CORE ANIMATION ENGINE
-    // ================================================
-    class AnimationEngine {
-        constructor() {
-            this.cache = new Map();
-            this.rafIds = new Set();
-            this.observers = new Map();
-            this.isHeroPage = false;
-            this.init();
-        }
-
-        init() {
-            this.cacheElements();
-            this.setupEventListeners();
-            this.initAnimations();
-        }
-
-        cacheElements() {
-            Object.entries(CONFIG.selectors).forEach(([key, selector]) => {
-                const element = selector.startsWith('#') 
-                    ? document.getElementById(selector.substring(1))
-                    : document.querySelector(selector);
-                
-                if (key === 'fadeElements' || key === 'galleryItems' || key === 'galleryImages') {
-                    this.cache.set(key, document.querySelectorAll(selector));
-                } else {
-                    this.cache.set(key, element);
-                }
-            });
-
-            this.isHeroPage = !!this.cache.get('heroSection');
-        }
-
+    <script>
         // ================================================
-        // HIGH-PERFORMANCE EVENT HANDLING
+        // SIMPLE FUNCTIONALITY SCRIPT
         // ================================================
-        setupEventListeners() {
-            // Single scroll handler with debouncing
-            this.debouncedScroll = this.debounce(this.handleScroll.bind(this), 16);
-            window.addEventListener('scroll', this.debouncedScroll, { passive: true });
 
-            // Smooth scroll for anchor links
-            this.setupSmoothScroll();
-
-            // Gallery interactions
-            this.setupGallery();
-
-            // Back to top
-            const backToTop = this.cache.get('backToTop');
-            if (backToTop) {
-                backToTop.addEventListener('click', () => this.scrollToTop());
-            }
-
-            // Keyboard navigation for lightbox
-            document.addEventListener('keydown', (e) => this.handleKeyboard(e));
-        }
-
-        // ================================================
-        // PAGE ENTRANCE ANIMATIONS
-        // ================================================
-        initAnimations() {
-            // Page fade in
-            requestAnimationFrame(() => {
-                document.body.classList.add('page-loaded');
-            });
-
-            // Hero page specific animations
-            if (this.isHeroPage) {
-                this.animateHeroEntrance();
-                this.createScrollIndicator();
-            }
-
-            // Loading screen
-            const loader = this.cache.get('loadingScreen');
-            if (loader) {
-                setTimeout(() => {
-                    loader.classList.add('loaded');
-                }, CONFIG.animation.duration.pageFade);
-            }
-
-            // Fade in on scroll
-            this.initIntersectionObserver();
-        }
-
-        animateHeroEntrance() {
-            const navbar = this.cache.get('navbar');
-            const heroTitle = this.cache.get('heroTitle');
-            const heroSection = this.cache.get('heroSection');
-
-            // Navbar slide down
-            if (navbar) {
-                navbar.classList.add('navbar-entering');
-                setTimeout(() => {
-                    navbar.classList.remove('navbar-entering');
-                    navbar.classList.add('navbar-visible');
-                }, 100);
-            }
-
-            // Hero title letter animation
-            if (heroTitle) {
-                this.animateLetters(heroTitle);
-            }
-
-            // Hero elements stagger
-            const heroElements = heroSection?.querySelectorAll('.hero-subtitle, .hero-divider, .btn-gold');
-            if (heroElements) {
-                this.staggerAnimation(heroElements, 200);
-            }
-
-            // Gold wave effect
-            if (heroSection) {
-                this.createGoldWave(heroSection);
-            }
-        }
-
-        // ================================================
-        // ADVANCED ANIMATION METHODS
-        // ================================================
-        animateLetters(element) {
-            const text = element.textContent;
-            element.innerHTML = '';
-            
-            text.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                span.className = 'letter-animation';
-                span.textContent = char === ' ' ? '\u00A0' : char;
-                span.style.setProperty('--letter-index', index);
-                element.appendChild(span);
-            });
-        }
-
-        staggerAnimation(elements, delay = 150) {
-            elements.forEach((el, index) => {
-                el.style.setProperty('--stagger-index', index);
-                el.classList.add('stagger-animation');
-            });
-
-            // Cleanup after animations complete
-            const totalDuration = elements.length * delay + CONFIG.animation.duration.heroStagger;
-            setTimeout(() => {
-                elements.forEach(el => {
-                    el.classList.remove('stagger-animation');
-                    el.style.removeProperty('--stagger-index');
-                });
-            }, totalDuration);
-        }
-
-        createGoldWave(container) {
-            const wave = document.createElement('div');
-            wave.className = 'gold-wave-effect';
-            container.appendChild(wave);
-
-            setTimeout(() => {
-                if (wave.parentNode) wave.remove();
-            }, CONFIG.animation.duration.waveFlow);
-        }
-
-        createScrollIndicator() {
-            const heroSection = this.cache.get('heroSection');
-            if (!heroSection) return;
-
-            const indicator = document.createElement('div');
-            indicator.className = 'scroll-indicator';
-            indicator.innerHTML = '<div class="scroll-indicator-dot"></div>';
-            heroSection.appendChild(indicator);
-
-            // Auto-remove on scroll
-            const removeIndicator = () => {
-                if (window.scrollY > CONFIG.thresholds.scrollIndicator) {
-                    indicator.classList.add('fading-out');
-                    setTimeout(() => indicator.remove(), 500);
-                    window.removeEventListener('scroll', removeIndicator);
-                }
-            };
-            window.addEventListener('scroll', removeIndicator, { passive: true });
-        }
-
-        // ================================================
-        // SCROLL-BASED ANIMATIONS
-        // ================================================
-        handleScroll() {
-            const scrollY = window.scrollY;
-            const navbar = this.cache.get('navbar');
-            const backToTop = this.cache.get('backToTop');
-
-            // Navbar scroll effect
-            if (navbar) {
-                navbar.classList.toggle('navbar-scrolled', scrollY > CONFIG.thresholds.navbarScroll);
-            }
-
-            // Back to top button
-            if (backToTop) {
-                backToTop.classList.toggle('visible', scrollY > CONFIG.thresholds.backToTop);
-            }
-        }
-
-        initIntersectionObserver() {
-            const fadeElements = this.cache.get('fadeElements');
-            if (!fadeElements?.length) return;
-
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('in-view');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                },
-                {
-                    rootMargin: '50px',
-                    threshold: 0.1
-                }
-            );
-
-            fadeElements.forEach(el => observer.observe(el));
-            this.observers.set('fadeObserver', observer);
-        }
-
-        // ================================================
-        // GALLERY & LIGHTBOX SYSTEM
-        // ================================================
-        setupGallery() {
-            const galleryItems = this.cache.get('galleryItems');
-            const modal = this.cache.get('lightboxModal');
-
-            if (!galleryItems?.length || !modal) return;
-
-            // Lightbox system
-            this.lightbox = {
-                modal,
-                currentIndex: 0,
-                images: Array.from(document.querySelectorAll('.gallery-img')),
-                isOpen: false
-            };
-
-            // Gallery item animations
-            this.animateGalleryEntrance(galleryItems);
-
-            // Click handlers
-            galleryItems.forEach((item, index) => {
-                item.addEventListener('click', () => this.openLightbox(index));
-            });
-
-            // Lightbox controls
-            const closeBtn = modal.querySelector('.close-lightbox');
-            const prevBtn = modal.querySelector('.prev-btn');
-            const nextBtn = modal.querySelector('.next-btn');
-
-            if (closeBtn) closeBtn.addEventListener('click', () => this.closeLightbox());
-            if (prevBtn) prevBtn.addEventListener('click', () => this.navigateLightbox(-1));
-            if (nextBtn) nextBtn.addEventListener('click', () => this.navigateLightbox(1));
-
-            // Close on backdrop click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) this.closeLightbox();
-            });
-        }
-
-        animateGalleryEntrance(items) {
-            items.forEach((item, index) => {
-                item.style.setProperty('--gallery-index', index);
-                item.classList.add('gallery-item-entering');
-                
-                // Remove class after animation
-                setTimeout(() => {
-                    item.classList.remove('gallery-item-entering');
-                    item.style.removeProperty('--gallery-index');
-                }, index * 150 + 800);
-            });
-        }
-
-        openLightbox(index) {
-            if (!this.lightbox || !this.lightbox.images[index]) return;
-
-            this.lightbox.currentIndex = index;
-            this.lightbox.isOpen = true;
-            
-            const modal = this.lightbox.modal;
-            const img = modal.querySelector('#modal-img');
-            const caption = modal.querySelector('#modal-caption');
-            const currentImage = this.lightbox.images[index];
-
-            if (img) img.src = currentImage.src;
-            if (caption) caption.textContent = currentImage.alt;
-
-            modal.classList.add('active');
-            document.body.classList.add('lightbox-open');
-        }
-
-        navigateLightbox(direction) {
-            if (!this.lightbox || !this.lightbox.isOpen) return;
-
-            const newIndex = (this.lightbox.currentIndex + direction + this.lightbox.images.length) % this.lightbox.images.length;
-            this.openLightbox(newIndex);
-        }
-
-        closeLightbox() {
-            if (!this.lightbox || !this.lightbox.isOpen) return;
-
-            const modal = this.lightbox.modal;
-            modal.classList.remove('active');
-            document.body.classList.remove('lightbox-open');
-            
-            setTimeout(() => {
-                this.lightbox.isOpen = false;
-            }, 300);
-        }
-
-        // ================================================
-        // SMOOTH SCROLL SYSTEM
-        // ================================================
-        setupSmoothScroll() {
-            document.addEventListener('click', (e) => {
-                const link = e.target.closest('a[href^="#"]');
-                if (!link) return;
-
-                const targetId = link.getAttribute('href');
-                if (targetId === '#') return;
-
-                e.preventDefault();
-                this.scrollToElement(targetId);
-                
-                // Close mobile menu if open
-                const navMenu = this.cache.get('navMenu');
-                if (navMenu?.classList.contains('show')) {
-                    const bsCollapse = window.bootstrap?.Collapse;
-                    if (bsCollapse) {
-                        new bsCollapse(navMenu).hide();
-                    }
-                }
-            });
-        }
-
-        scrollToElement(selector) {
-            const target = document.querySelector(selector);
-            if (!target) return;
-
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
-            const startPosition = window.pageYOffset;
-            const distance = targetPosition - startPosition - 80;
-            const duration = 800;
-            let startTime = null;
-
-            const easeInOutCubic = (t) => {
-                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-            };
-
-            const animation = (currentTime) => {
-                if (!startTime) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                const easeProgress = easeInOutCubic(progress);
-
-                window.scrollTo(0, startPosition + distance * easeProgress);
-
-                if (timeElapsed < duration) {
-                    this.rafIds.add(requestAnimationFrame(animation));
-                }
-            };
-
-            this.rafIds.add(requestAnimationFrame(animation));
-        }
-
-        scrollToTop() {
-            const startPosition = window.pageYOffset;
-            const duration = 600;
-            let startTime = null;
-
-            const easeOutCubic = (t) => {
-                return 1 - Math.pow(1 - t, 3);
-            };
-
-            const animation = (currentTime) => {
-                if (!startTime) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const progress = Math.min(timeElapsed / duration, 1);
-                const easeProgress = easeOutCubic(progress);
-
-                window.scrollTo(0, startPosition * (1 - easeProgress));
-
-                if (timeElapsed < duration) {
-                    this.rafIds.add(requestAnimationFrame(animation));
-                }
-            };
-
-            this.rafIds.add(requestAnimationFrame(animation));
-        }
-
-        // ================================================
-        // KEYBOARD NAVIGATION
-        // ================================================
-        handleKeyboard(e) {
-            if (!this.lightbox?.isOpen) return;
-
-            switch(e.key) {
-                case 'Escape':
-                    this.closeLightbox();
-                    break;
-                case 'ArrowLeft':
-                    this.navigateLightbox(-1);
-                    break;
-                case 'ArrowRight':
-                    this.navigateLightbox(1);
-                    break;
-            }
-        }
-
-        // ================================================
-        // PERFORMANCE OPTIMIZATION UTILITIES
-        // ================================================
-        debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
-
-        throttle(func, limit) {
-            let inThrottle;
-            return function() {
-                const args = arguments;
-                const context = this;
-                if (!inThrottle) {
-                    func.apply(context, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            };
-        }
-
-        // ================================================
-        // CLEANUP & MEMORY MANAGEMENT
-        // ================================================
-        destroy() {
-            // Clean up RAF callbacks
-            this.rafIds.forEach(id => cancelAnimationFrame(id));
-            this.rafIds.clear();
-
-            // Disconnect observers
-            this.observers.forEach(observer => observer.disconnect());
-            this.observers.clear();
-
-            // Remove event listeners
-            window.removeEventListener('scroll', this.debouncedScroll);
-            
-            // Clear cache
-            this.cache.clear();
-        }
-    }
-
-    // ================================================
-    // INITIALIZATION
-    // ================================================
-    let animationEngine = null;
-
-    // Wait for DOM and critical resources
-    const initPremiumAnimations = () => {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                animationEngine = new AnimationEngine();
-            });
-        } else {
-            animationEngine = new AnimationEngine();
-        }
-    };
-
-    // Initialize with requestIdleCallback for better performance
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(initPremiumAnimations, { timeout: 2000 });
-    } else {
-        setTimeout(initPremiumAnimations, 100);
-    }
-
-    // Clean up on page unload
-    window.addEventListener('beforeunload', () => {
-        if (animationEngine) {
-            animationEngine.destroy();
-            animationEngine = null;
-        }
-    });
-
-    // Make engine available globally for debugging (optional)
-    if (window.AMAZING_CREATURES_DEBUG) {
-        window.animationEngine = animationEngine;
-    }
-
-})();
-
-// ================================================
-// OPTIONAL: INSTANT LOADING PROGRESS
-// ================================================
-(function() {
-    'use strict';
-
-    // Show loading state immediately
-    if (document.readyState === 'loading') {
-        document.documentElement.classList.add('page-loading');
-    }
-
-    // Remove loading class when everything is ready
-    const removeLoadingState = () => {
-        document.documentElement.classList.remove('page-loading');
-        document.documentElement.classList.add('page-ready');
-    };
-
-    if (document.readyState === 'complete') {
-        removeLoadingState();
-    } else {
-        window.addEventListener('load', removeLoadingState, { once: true });
-    }
-
-    // Enhanced error handling
-    window.addEventListener('error', (e) => {
-        console.error('Animation error:', e.error);
-        // Fallback to basic functionality
-        document.body.classList.add('animation-fallback');
-    });
-
-})();
-
-
-
-
-
-// dodatak
-
-
-// Dodaj na kraj svog JS fajla
-(function() {
-    'use strict';
-    
-    // Force responsive layout on load and resize
-    function fixLayout() {
-        // 1. Force body width
-        document.body.style.width = '100%';
-        document.body.style.maxWidth = '100vw';
-        document.body.style.overflowX = 'hidden';
+        // Hamburger menu funkcionalnost
+        const menuToggle = document.getElementById('menuToggle');
+        const navOverlay = document.getElementById('navOverlay');
         
-        // 2. Center all containers
-        const containers = document.querySelectorAll('.container');
-        containers.forEach(container => {
-            container.style.marginLeft = 'auto';
-            container.style.marginRight = 'auto';
-            container.style.paddingLeft = '15px';
-            container.style.paddingRight = '15px';
-        });
-        
-        // 3. Fix gallery items
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        galleryItems.forEach(item => {
-            item.style.margin = '0 auto';
-            item.style.maxWidth = '100%';
-        });
-        
-        // 4. Check for overflow
-        const html = document.documentElement;
-        const body = document.body;
-        
-        if (html.scrollWidth > html.clientWidth || 
-            body.scrollWidth > body.clientWidth) {
-            // Force no horizontal scroll
-            html.style.overflowX = 'hidden';
-            body.style.overflowX = 'hidden';
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navOverlay.classList.toggle('active');
             
-            // Find offending elements
-            const allElements = document.querySelectorAll('*');
-            allElements.forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.right > window.innerWidth) {
-                    el.style.maxWidth = '100%';
-                    el.style.overflowX = 'hidden';
-                }
-            });
-        }
-    }
-    
-    // Run on load and resize
-    window.addEventListener('load', fixLayout);
-    window.addEventListener('resize', fixLayout);
-    
-    // Also run after all images load
-    window.addEventListener('DOMContentLoaded', () => {
-        // Wait for images
-        const images = document.querySelectorAll('img');
-        let loadedImages = 0;
-        
-        images.forEach(img => {
-            if (img.complete) {
-                loadedImages++;
+            // Blokiranje scroll-a kada je meni otvoren
+            if (navOverlay.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
             } else {
-                img.addEventListener('load', () => {
-                    loadedImages++;
-                    if (loadedImages === images.length) {
-                        setTimeout(fixLayout, 100);
-                    }
-                });
+                document.body.style.overflow = 'auto';
             }
         });
         
-        if (images.length === 0 || loadedImages === images.length) {
-            setTimeout(fixLayout, 100);
+        // Zatvaranje menija kada se klikne na link
+        const navLinks = document.querySelectorAll('.nav-overlay a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Zatvaranje menija kada se klikne izvan menija
+        navOverlay.addEventListener('click', (e) => {
+            if (e.target === navOverlay) {
+                menuToggle.classList.remove('active');
+                navOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Animacija za gold wave
+        const goldWave = document.querySelector('.gold-wave');
+        let wavePosition = 0;
+        
+        function animateWave() {
+            wavePosition -= 1;
+            if (goldWave) {
+                goldWave.style.backgroundPositionX = wavePosition + 'px';
+            }
+            requestAnimationFrame(animateWave);
         }
-    });
-})();
-</script>
-
-
-
+        
+        // Pokretanje animacije nakon učitavanja stranice
+        window.addEventListener('load', () => {
+            animateWave();
+            
+            // Fade in elements on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            });
+            
+            fadeElements.forEach(el => observer.observe(el));
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.site-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Back to top button
+        const backToTop = document.querySelector('.back-to-top');
+        if (backToTop) {
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Lightbox functionality
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const closeLightbox = lightboxModal?.querySelector('.close-lightbox');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const modalImg = document.getElementById('modal-img');
+        const modalCaption = document.getElementById('modal-caption');
+        
+        let currentImageIndex = 0;
+        const galleryImages = Array.from(document.querySelectorAll('.gallery-img'));
+        
+        // Open lightbox
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentImageIndex = index;
+                updateLightbox();
+                lightboxModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Close lightbox
+        if (closeLightbox) {
+            closeLightbox.addEventListener('click', () => {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        }
+        
+        // Lightbox navigation
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                updateLightbox();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                updateLightbox();
+            });
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightboxModal.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            } else if (e.key === 'ArrowLeft') {
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                updateLightbox();
+            } else if (e.key === 'ArrowRight') {
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                updateLightbox();
+            }
+        });
+        
+        // Update lightbox content
+        function updateLightbox() {
+            if (galleryImages[currentImageIndex]) {
+                modalImg.src = galleryImages[currentImageIndex].src;
+                modalCaption.textContent = galleryImages[currentImageIndex].alt;
+            }
+        }
+    </script>
 </body>
-
 </html>
