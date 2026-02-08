@@ -2819,6 +2819,91 @@ html {
     });
 
 })();
+
+
+
+
+
+// dodatak
+
+
+// Dodaj na kraj svog JS fajla
+(function() {
+    'use strict';
+    
+    // Force responsive layout on load and resize
+    function fixLayout() {
+        // 1. Force body width
+        document.body.style.width = '100%';
+        document.body.style.maxWidth = '100vw';
+        document.body.style.overflowX = 'hidden';
+        
+        // 2. Center all containers
+        const containers = document.querySelectorAll('.container');
+        containers.forEach(container => {
+            container.style.marginLeft = 'auto';
+            container.style.marginRight = 'auto';
+            container.style.paddingLeft = '15px';
+            container.style.paddingRight = '15px';
+        });
+        
+        // 3. Fix gallery items
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach(item => {
+            item.style.margin = '0 auto';
+            item.style.maxWidth = '100%';
+        });
+        
+        // 4. Check for overflow
+        const html = document.documentElement;
+        const body = document.body;
+        
+        if (html.scrollWidth > html.clientWidth || 
+            body.scrollWidth > body.clientWidth) {
+            // Force no horizontal scroll
+            html.style.overflowX = 'hidden';
+            body.style.overflowX = 'hidden';
+            
+            // Find offending elements
+            const allElements = document.querySelectorAll('*');
+            allElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.right > window.innerWidth) {
+                    el.style.maxWidth = '100%';
+                    el.style.overflowX = 'hidden';
+                }
+            });
+        }
+    }
+    
+    // Run on load and resize
+    window.addEventListener('load', fixLayout);
+    window.addEventListener('resize', fixLayout);
+    
+    // Also run after all images load
+    window.addEventListener('DOMContentLoaded', () => {
+        // Wait for images
+        const images = document.querySelectorAll('img');
+        let loadedImages = 0;
+        
+        images.forEach(img => {
+            if (img.complete) {
+                loadedImages++;
+            } else {
+                img.addEventListener('load', () => {
+                    loadedImages++;
+                    if (loadedImages === images.length) {
+                        setTimeout(fixLayout, 100);
+                    }
+                });
+            }
+        });
+        
+        if (images.length === 0 || loadedImages === images.length) {
+            setTimeout(fixLayout, 100);
+        }
+    });
+})();
 </script>
 
 
