@@ -1849,6 +1849,186 @@ html {
 }
 
 
+/* OVO JE SVE - KOPIRAJ CEO BLOK */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--dark-black);
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0;
+}
+
+.gold-wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(212,175,55,0.05), transparent);
+    pointer-events: none;
+}
+
+.hero-content {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.title-wrapper {
+    margin-bottom: 2rem;
+}
+
+.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.hero-title .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.amazing-word {
+    color: #f4e4a6;
+    animation: slideDown 1s ease 0.3s forwards;
+    margin-right: 20px;
+}
+
+.creatures-word {
+    color: #d4af37;
+    animation: slideUp 1s ease 0.6s forwards;
+}
+
+@keyframes slideDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lead {
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.9);
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 1s forwards;
+}
+
+.hero-divider {
+    width: 300px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    margin: 2rem auto;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.5s forwards;
+}
+
+.hero-subtitle {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.8s forwards;
+}
+
+.btn-gold {
+    padding: 15px 40px;
+    background: #d4af37;
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadeIn 1s ease 2.1s forwards;
+    transition: all 0.3s;
+}
+
+.btn-gold:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(212,175,55,0.3);
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* RESPONSIVE - OVO JE SVE ŠTO TREBA */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+        letter-spacing: 2px;
+    }
+    
+    .hero-title .word {
+        display: block;
+        margin-right: 0;
+    }
+    
+    .amazing-word {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .lead {
+        font-size: 1.1rem;
+        padding: 0 15px;
+    }
+    
+    .hero-divider {
+        width: 200px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .btn-gold {
+        padding: 12px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+    
+    .hero-divider {
+        width: 150px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+
+
+
     </style>
 </head>
 
@@ -1885,42 +2065,32 @@ html {
     <div class="container hero-content">
         
         <!-- ANIMIRANI TITLE -->
-        <div class="title-animation-wrapper">
+        <section id="home" class="hero-section">
+    <div class="gold-wave"></div>
+    <div class="container hero-content">
+        
+        <!-- OVO JE SVE ŠTO TI TREBA -->
+        <div class="title-wrapper">
             <h1 class="hero-title">
                 <span class="word amazing-word">AMAZING</span>
                 <span class="word creatures-word">CREATURES</span>
             </h1>
         </div>
         
-        <!-- TEKST SA ANIMACIJOM -->
-        <div class="text-animation-wrapper">
-            <p class="lead mb-4">
-                Dobrodošli u odgajivačnicu <span class="highlight">Amazing Creatures</span>.
-                Ako tražite pudlu koja je pametna, vesela i puna ljubavi, na pravom ste mestu. 
-                Upoznajte naše štence, odgajane s pažnjom i ljubavlju, postanite deo porodice Amazing Creatures.
-            </p>
-        </div>
+        <p class="lead mb-4">
+            Dobrodošli u odgajivačnicu Amazing Creatures.
+            Ako tražite pudlu koja je pametna, vesela i puna ljubavi, na pravom ste mestu.
+        </p>
         
-        <!-- DIVIDER SA ANIMACIJOM -->
-        <div class="divider-animation-wrapper">
-            <div class="hero-divider"></div>
-        </div>
+        <div class="hero-divider"></div>
         
-        <!-- SUBTITLE SA ANIMACIJOM -->
-        <div class="subtitle-animation-wrapper">
-            <p class="hero-subtitle gold-text">FCI 7364</p>
-        </div>
+        <p class="hero-subtitle gold-text">FCI 7364</p>
         
-        <!-- BUTTON SA ANIMACIJOM -->
-        <div class="button-animation-wrapper">
-            <a href="#about" class="btn btn-gold">
-                <i class="fas fa-paw me-2"></i>Otkrijte naš svet
-            </a>
-        </div>
+        <a href="#about" class="btn btn-gold">Otkrijte naš svet</a>
         
     </div>
-</section>
 
+</section>
     <!-- About Us Section -->
     <section id="about" class="about-section">
         <div class="container">
