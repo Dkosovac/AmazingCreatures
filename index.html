@@ -24,18 +24,19 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap"
         rel="stylesheet">
-<!-- Povezivanje sa Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Povezivanje sa Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <style>
         /* 1. OSNOVNE BOJE I VARIJABLE */
         :root {
-            --rich-gold: #d4af37;
+            --rich-gold: #e9be31;
             --dark-black: #0a0a0a;
             --text-white: #ffffff;
-            --gold-gradient: linear-gradient(90deg, #d4af37, #f4e4a6, #d4af37);
+            --gold-gradient: linear-gradient(90deg, #d4af37, #f4e4a6, #0f0c00);
         }
 
         .hero-section {
@@ -154,7 +155,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(2px);
         }
 
         /* Bootstrap klasa koja se aktivira na klik */
@@ -193,7 +194,7 @@
         .hero-section {
             height: 100vh;
             min-height: 600px;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                 url('assets/gallery/banner.jpg') center/cover no-repeat;
             position: relative;
             display: flex;
@@ -201,10 +202,6 @@
             justify-content: center;
         }
 
-        .hero-section p {
-            font-size: 24px;
-            font-style: italic;
-        }
 
         /* 7. DODACI (DUGMAD I TEKST) */
         .gold-text {
@@ -399,11 +396,12 @@
         <div class="gold-wave"></div>
         <div class="container hero-content">
             <h1 class="hero-title gold-text">AMAZING CREATURES</h1>
+            <p class="lead mb-4">
+                Dobrodošli u odgajivačnicu Amazing Creatures
+                Ako tražite pudlu koja je pametna, vesela i puna ljubavi, na pravom ste mestu. Upoznajte naše štence,
+                odgajane s pažnjom i ljubavlju, postanite deo porodice Amazing Creatures.</p>
             <div class="hero-divider"></div>
             <p class="hero-subtitle">FCI 7364</p>
-            <p class="lead mb-4">
-          Dobrodošli u odgajivačnicu Amazing Creatures
-Ako tražite pudlu koja je pametna, vesela i puna ljubavi, na pravom ste mestu. Upoznajte naše štence, odgajane s pažnjom i ljubavlju, postanite deo porodice Amazing Creatures.</p>
             <a href="#about" class="btn btn-gold">Otkrijte naš svet</a>
         </div>
     </section>
@@ -749,20 +747,20 @@ Ako tražite pudlu koja je pametna, vesela i puna ljubavi, na pravom ste mestu. 
     </button>
 
     <!-- Lightbox Modal sa Navigacijom -->
-<div id="lightbox-modal" class="lightbox">
-    <span class="close-lightbox">&times;</span>
-    
-    <!-- Strelica levo -->
-    <button class="nav-btn prev-btn" id="prevBtn">&#10094;</button>
-    
-    <div class="lightbox-content">
-        <img id="modal-img" src="" alt="">
-        <div id="modal-caption"></div>
+    <div id="lightbox-modal" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+
+        <!-- Strelica levo -->
+        <button class="nav-btn prev-btn" id="prevBtn">&#10094;</button>
+
+        <div class="lightbox-content">
+            <img id="modal-img" src="" alt="">
+            <div id="modal-caption"></div>
+        </div>
+
+        <!-- Strelica desno -->
+        <button class="nav-btn next-btn" id="nextBtn">&#10095;</button>
     </div>
-    
-    <!-- Strelica desno -->
-    <button class="nav-btn next-btn" id="nextBtn">&#10095;</button>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -1149,83 +1147,83 @@ Ako tražite pudlu koja je pametna, vesela i puna ljubavi, na pravom ste mestu. 
             }
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-    const modal = document.getElementById("lightbox-modal");
-    const modalImg = document.getElementById("modal-img");
-    const captionText = document.getElementById("modal-caption");
-    const closeBtn = document.querySelector(".close-lightbox");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    
-    // Uzimamo sve slike iz galerije
-    const galleryItems = Array.from(document.querySelectorAll(".gallery-img"));
-    let currentIndex = 0;
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("lightbox-modal");
+            const modalImg = document.getElementById("modal-img");
+            const captionText = document.getElementById("modal-caption");
+            const closeBtn = document.querySelector(".close-lightbox");
+            const prevBtn = document.getElementById("prevBtn");
+            const nextBtn = document.getElementById("nextBtn");
 
-    // Funkcija za otvaranje modala na osnovu indeksa
-    function openImage(index) {
-        currentIndex = index;
-        const selectedImg = galleryItems[currentIndex];
-        
-        modal.style.display = "flex";
-        modalImg.src = selectedImg.src;
-        captionText.innerHTML = selectedImg.alt;
-    }
+            // Uzimamo sve slike iz galerije
+            const galleryItems = Array.from(document.querySelectorAll(".gallery-img"));
+            let currentIndex = 0;
 
-    // Dodaj klik event na svaku sliku u galeriji
-    galleryItems.forEach((img, index) => {
-        img.parentElement.addEventListener("click", () => {
-            openImage(index);
+            // Funkcija za otvaranje modala na osnovu indeksa
+            function openImage(index) {
+                currentIndex = index;
+                const selectedImg = galleryItems[currentIndex];
+
+                modal.style.display = "flex";
+                modalImg.src = selectedImg.src;
+                captionText.innerHTML = selectedImg.alt;
+            }
+
+            // Dodaj klik event na svaku sliku u galeriji
+            galleryItems.forEach((img, index) => {
+                img.parentElement.addEventListener("click", () => {
+                    openImage(index);
+                });
+            });
+
+            // Sledeća slika
+            function showNext() {
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                updateModal();
+            }
+
+            // Prethodna slika
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                updateModal();
+            }
+
+            // Update slike u modalu bez ponovnog otvaranja celog modala
+            function updateModal() {
+                modalImg.style.opacity = "0"; // Jednostavna animacija prelaza
+                setTimeout(() => {
+                    modalImg.src = galleryItems[currentIndex].src;
+                    captionText.innerHTML = galleryItems[currentIndex].alt;
+                    modalImg.style.opacity = "1";
+                }, 200);
+            }
+
+            // Eventovi za dugmad
+            nextBtn.addEventListener("click", (e) => {
+                e.stopPropagation(); // Sprečava zatvaranje modala
+                showNext();
+            });
+
+            prevBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                showPrev();
+            });
+
+            // Zatvaranje
+            closeBtn.onclick = () => modal.style.display = "none";
+            modal.onclick = (e) => {
+                if (e.target === modal) modal.style.display = "none";
+            };
+
+            // Kontrole na tastaturi
+            document.addEventListener("keydown", (e) => {
+                if (modal.style.display === "flex") {
+                    if (e.key === "ArrowRight") showNext();
+                    if (e.key === "ArrowLeft") showPrev();
+                    if (e.key === "Escape") modal.style.display = "none";
+                }
+            });
         });
-    });
-
-    // Sledeća slika
-    function showNext() {
-        currentIndex = (currentIndex + 1) % galleryItems.length;
-        updateModal();
-    }
-
-    // Prethodna slika
-    function showPrev() {
-        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-        updateModal();
-    }
-
-    // Update slike u modalu bez ponovnog otvaranja celog modala
-    function updateModal() {
-        modalImg.style.opacity = "0"; // Jednostavna animacija prelaza
-        setTimeout(() => {
-            modalImg.src = galleryItems[currentIndex].src;
-            captionText.innerHTML = galleryItems[currentIndex].alt;
-            modalImg.style.opacity = "1";
-        }, 200);
-    }
-
-    // Eventovi za dugmad
-    nextBtn.addEventListener("click", (e) => {
-        e.stopPropagation(); // Sprečava zatvaranje modala
-        showNext();
-    });
-
-    prevBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        showPrev();
-    });
-
-    // Zatvaranje
-    closeBtn.onclick = () => modal.style.display = "none";
-    modal.onclick = (e) => {
-        if (e.target === modal) modal.style.display = "none";
-    };
-
-    // Kontrole na tastaturi
-    document.addEventListener("keydown", (e) => {
-        if (modal.style.display === "flex") {
-            if (e.key === "ArrowRight") showNext();
-            if (e.key === "ArrowLeft") showPrev();
-            if (e.key === "Escape") modal.style.display = "none";
-        }
-    });
-});
     </script>
 
 

@@ -281,36 +281,41 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title {
-    font-size: 4rem;
+    font-size: 6rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    text-shadow: 0 5px 15px rgba(4, 14, 145, 0.5);
+    text-shadow: 0 5px 15px rgba(248, 219, 56, 0.5);
     animation: fadeInUp 1s ease-out;
 }
 
 .hero-content .lead {
     color: var(--light-gold);
+    padding: 1.5rem;
+}
+.hero-content p {
+    font-size: 1.5rem;
 }
 
+
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--rich-gold);
-    margin-bottom: 2rem;
+    margin: 2rem;
     animation: fadeInUp 1s ease-out 0.3s both;
 }
 
 .hero-divider {
-    width: 200px;
-    height: 2px;
+    width: 300px;
+    height: 2.5px;
     background: linear-gradient(90deg, transparent, var(--rich-gold), transparent);
-    margin: 2rem auto;
+    margin: 2.5rem auto;
     animation: fadeInUp 1s ease-out 0.6s both;
 }
 
 .btn-gold {
     background-color: var(--rich-gold);
     color: var(--dark-black);
-    padding: 0.8rem 2rem;
+    padding: 1.2rem 2rem;
     border-radius: 0;
     font-weight: 600;
     border: none;
@@ -598,7 +603,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(8px);
+    //backdrop-filter: blur(8px);
     justify-content: center;
     align-items: center;
 }
