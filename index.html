@@ -94,6 +94,227 @@ img {
     color: var(--rich-gold) !important;
 }
 
+/*sajt header i hero */
+
+
+/* =========================================
+   2. HEADER & NAVIGACIJA (PREMIUM STIL)
+   ========================================= */
+
+.site-header {
+    position: absolute;      /* Stoji preko slike */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 5%;        /* Razmak sa strane */
+    display: flex;
+    justify-content: space-between; /* Razdvaja logo i meni na ivice */
+    align-items: center;
+    z-index: 1000;           /* Uvek iznad svega */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent); /* Blago zatamnjenje gore */
+}
+
+.logo img {
+    height: 90px;            /* Visina loga za Desktop */
+    width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); /* Senka da se bolje vidi */
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);  /* Blago uvećanje na hover */
+}
+
+/* Stil za HAMBURGER DUGME */
+.menu-toggle {
+    background: transparent;
+    border: 1px solid var(--rich-gold);
+    padding: 10px 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;                /* Razmak između linija */
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 2px;
+    background-color: var(--rich-gold);
+    display: block;
+    transition: 0.3s;
+}
+
+.menu-toggle:hover {
+    background: rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* NAV OVERLAY (Meni preko celog ekrana) */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 5, 5, 0.98); /* Skoro crna pozadina */
+    z-index: 999;
+    display: flex;           /* Flex za centriranje linkova */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); /* Premium blur efekat */
+}
+
+.nav-overlay ul {
+    text-align: center;
+}
+
+.nav-overlay a {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: var(--text-white);
+    display: block;
+    margin: 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.nav-overlay a:hover {
+    color: var(--rich-gold);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+}
+
+/* =========================================
+   3. HERO SEKCIJA (CENTAR PAŽNJE)
+   ========================================= */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;       /* Minimalna visina ceo ekran */
+    
+    /* Pozadina sa tamnim slojem preko slike za bolju čitljivost teksta */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+                url('assets/gallery/banner.jpg') center/cover no-repeat;
+                
+    display: flex;           /* Flexbox magija za centriranje */
+    align-items: center;     /* Vertikalno centriranje */
+    justify-content: center; /* Horizontalno centriranje */
+    text-align: center;      /* Sav tekst u centru */
+    padding: 80px 20px 20px; /* Padding da tekst ne beži pod header */
+}
+
+.hero-content {
+    max-width: 900px;        /* Ograničavamo širinu da redovi ne budu predugi */
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+/* PREMIUM HERO TYPOGRAPHY */
+.hero-title {
+    font-family: 'Cinzel', serif;
+    /* CLAMP: Font se automatski menja između 2rem (mobilni) i 5rem (desktop) */
+    font-size: clamp(2rem, 6vw, 5rem); 
+    line-height: 1.1;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    color: var(--rich-gold);
+    
+    /* Zlatni sjaj i senka teksta */
+    text-shadow: 2px 2px 10px rgba(0,0,0, 0.8);
+}
+
+.hero-content p.lead {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.9rem, 1.2vw, 1.2rem); /* Responsive font za opis */
+    color: #e0e0e0;          /* Svetlo siva je čitljivija od bele na tamnom */
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    max-width: 700px;        /* Uži tekst za lakše čitanje */
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 3px rgba(0,0,0, 0.9);
+}
+
+.hero-divider {
+    height: 2px;
+    width: 100px;
+    background: var(--rich-gold);
+    margin: 0 auto 20px auto; /* Centrirana linija */
+    box-shadow: 0 0 10px var(--rich-gold);
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: var(--light-gold);
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* PREMIUM DUGME */
+.btn-gold {
+    background: var(--rich-gold);
+    color: var(--dark-black);
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 2px;      /* Malo oštrije ivice za elegantan izgled */
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: inline-block;   /* Da padding radi kako treba */
+}
+
+.btn-gold:hover {
+    background: var(--light-gold);
+    color: #000;
+    transform: translateY(-3px); /* Podigne se malo */
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4); /* Zlatna senka */
+}
+
+/* =========================================
+   RESPONSIVE (MOBILNI TELEFONI)
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. Smanjujemo header i logo */
+    .site-header {
+        padding: 15px;
+    }
+    
+    .logo img {
+        height: 55px; /* Manji logo na mobilnom */
+    }
+
+    /* 2. Prilagođavamo Hero sekciju */
+    .hero-section {
+        padding-top: 100px; /* Da tekst ne ode pod meni */
+        align-items: center; /* I dalje centrirano */
+    }
+
+    .hero-title {
+        /* Dodatno osiguranje da se reč ne lomi ružno */
+        word-break: break-word; 
+        margin-bottom: 20px;
+    }
+
+    .hero-content p.lead {
+        padding: 0 10px; /* Da tekst ne dira ivice ekrana */
+        text-align: center;
+    }
+    
+    .btn-gold {
+        width: 80%; /* Široko dugme na telefonu je lakše za kliknuti */
+        padding: 15px 0;
+    }
+}
+
+
     </style>
 </head>
 
