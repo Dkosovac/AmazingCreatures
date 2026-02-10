@@ -98,52 +98,131 @@
         2. HEADER & NAVIGACIJA (PREMIUM STIL - ISPRAVLJENO)
         ========================================= */
 
-        .site-header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-            transition: all 0.3s ease;
-        }
+.site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* 5% daje lep razmak sa strana da ne beži uz ivicu */
+    padding: 20px 5%; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    transition: all 0.3s ease;
+    height: auto !important; /* Dozvoljava da visina raste prema logu */
+}
 
-        .site-header.scrolled {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 5%;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
-        }
+/* Kada se skroluje, smanjujemo padding da bi header bio uži */
+.site-header.scrolled {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 10px 5%;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
+/* --- LOGO KONTROLA --- */
 
-        .logo-img {
-            height: 120px;
-            width: auto;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-            transition: transform 0.3s ease;
-        }
+/* LOGO ZA DESKTOP (od 992px pa naviše) */
+@media (min-width: 992px) {
+    .logo-img img {
+        height: 80px !important; /* Ovde menjaj veličinu za desktop */
+        width: auto;
+    }
+    .logo-text {
+        font-size: 1.6rem;
+    }
+}
 
-        .logo-img:hover {
-            transform: scale(1.05);
-        }
+/* LOGO ZA TELEFON (ispod 768px) */
+@media (max-width: 767px) {
+    .site-header {
+        padding: 15px 4%; /* Malo uži padding na telefonu */
+    }
+    .logo-img img {
+        height: 55px !important; /* Ovde menjaj veličinu za telefon */
+        width: auto;
+    }
+    .logo-text {
+        font-size: 1.1rem;
+    }
+    /* Smanjujemo hamburger da ne bude prevelik u odnosu na logo */
+    .hamburger-menu {
+        transform: scale(0.9);
+    }
+}
 
-        .logo-text {
-            color: var(--rich-gold);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-left: 10px;
-            letter-spacing: 1px;
-            font-family: 'Cinzel', serif;
-        }
+/* 2. LOGO ZA TELEFON (ekrani manji od 768px) */
+@media (max-width: 767px) {
+    .logo-img img, 
+    .main-logo,
+    .logo-img { 
+        height: 60px !important; /* OVDE POVEĆAVAJ/SMANJUJ ZA TELEFON */
+        width: auto !important;
+        max-width: none !important; /* Sprečava telefon da "guši" sliku */
+    }
+
+    .logo-text {
+        font-size: 1rem !important; /* Veličina teksta na telefonu */
+    }
+    
+    .logo {
+        gap: 8px !important; /* Razmak između slike i teksta na telefonu */
+    }
+}
+
+/* 3. LOGO ZA TABLETE (između 768px i 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .logo-img img, .main-logo {
+        height: 70px !important; /* Srednja veličina za tablete */
+    }
+}
+
+/* 4. LOGO ZA DESKTOP (ekrani od 992px pa naviše) */
+@media (min-width: 992px) {
+    .logo-img img, .main-logo {
+        height: 90px !important; /* TVOJA VELIČINA ZA DESKTOP */
+        width: auto !important;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem !important;
+    }
+}
+/* Osnovni stil za logo (važi za mobilne uređaje) */
+.main-logo {
+    height: 50px; /* Podesi visinu koja ti odgovara za telefon */
+    width: auto;  /* Da bi se zadržale proporcije */
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Stil za logo tekst (ako je prevelik na mobilnom) */
+.logo-text {
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
+
+/* DESKTOP podešavanja (ekrani širi od 992px) */
+@media (min-width: 992px) {
+    .main-logo {
+        height: 80px; /* Ovde ga povećaš za desktop koliko god želiš */
+    }
+    
+    .logo-text {
+        font-size: 1.8rem; /* Veći tekst na desktopu */
+    }
+}
+
+/* Centriranje unutar headera */
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 15px; /* Razmak između slike i teksta */
+}
+        
 
         /* Stil za HAMBURGER DUGME */
         .hamburger-menu {
@@ -633,7 +712,16 @@
             align-items: center;
             text-align: center;
         }
+/* Dodaj ovo u CSS */
+.fci-stamp {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
 
+.fci-stamp:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
+}
         .stamp-fci {
             font-size: 32px;
             font-weight: 700;
@@ -1768,78 +1856,181 @@
 }
 
 /* Container za traku */
+/* --- SEKCIJA NAŠI KUPCI (Marquee) --- */
+
+#happy-clients {
+    background-color: #050505; /* Duboka crna pozadina */
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+/* Glavni kontejner koji pravi "fade" efekat na ivicama */
 .marquee-wrapper {
     display: flex;
     overflow: hidden;
     user-select: none;
     gap: 20px;
-    padding: 20px 0;
+    padding: 30px 0;
+    position: relative;
+    /* Ovaj deo pravi da slike polako nestaju na levoj i desnoj ivici */
+    -webkit-mask-image: linear-gradient(to right, 
+        transparent, 
+        black 15%, 
+        black 85%, 
+        transparent);
+    mask-image: linear-gradient(to right, 
+        transparent, 
+        black 15%, 
+        black 85%, 
+        transparent);
 }
 
+/* Traka sa sadržajem */
 .marquee-content {
     display: flex;
     flex-shrink: 0;
     gap: 20px;
     min-width: 100%;
-    animation: scroll-left 30s linear infinite;
+    animation: scroll-left 40s linear infinite; /* Sporije kretanje za lux efekat */
 }
 
-/* Pauza kad se pređe mišem */
+/* Zaustavi na hover */
 .marquee-wrapper:hover .marquee-content {
     animation-play-state: paused;
 }
 
-/* Stil slike u traci */
+/* Pojedinačna kartica kupca */
 .marquee-item {
     position: relative;
-    width: 200px; /* Možeš povećati po želji */
-    height: 250px;
-    border: 1px solid var(--rich-gold);
-    border-radius: 12px;
+    width: 240px;  /* Fiksna širina */
+    height: 320px; /* Portretni format */
+    border-radius: 15px;
     overflow: hidden;
-    flex-shrink: 0;
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Suptilna zlatna ivica */
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: #111;
 }
 
+/* Slika kupca */
 .marquee-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: grayscale(30%);
-    transition: 0.3s;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* Efekat na karticu kada se pređe mišem */
+.marquee-item:hover {
+    transform: translateY(-10px);
+    border-color: #d4af37; /* Jača zlatna na hover */
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
 }
 
 .marquee-item:hover img {
-    filter: grayscale(0%);
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
-/* Mali bedž sa gradom */
+/* Elegantan bedž sa gradom - POPRAVLJEN */
 .marquee-badge {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(212, 175, 55, 0.9); /* Gold boja */
-    color: black;
-    padding: 2px 12px;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.6); /* Providna crna */
+    backdrop-filter: blur(8px); /* Samo bedž je zamućen pozadi */
+    -webkit-backdrop-filter: blur(8px);
+    color: #d4af37; /* Zlatni tekst */
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    padding: 5px 12px;
     border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: bold;
-    white-space: nowrap;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 2;
 }
 
-/* Animacija kretanja */
+/* Suptilna senka na dnu slike da bi se dobila dubina */
+.marquee-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    pointer-events: none;
+}
+
+/* Animacija */
 @keyframes scroll-left {
-    from { transform: translateX(0); }
-    to { transform: translateX(-100%); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
 
-/* Responzivnost */
+/* Responzivnost za mobilne telefone */
 @media (max-width: 768px) {
     .marquee-item {
-        width: 150px;
-        height: 200px;
+        width: 180px;
+        height: 250px;
     }
+    .marquee-wrapper {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    }
+}
+
+
+.poodle-features {
+    background: #0a0a0a;
+    position: relative;
+}
+
+.poodle-card {
+    background: linear-gradient(145deg, #111, #050505);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    height: 100%;
+    transition: all 0.4s ease;
+}
+
+.poodle-card:hover {
+    border-color: var(--rich-gold);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--rich-gold);
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.poodle-card h3 {
+    color: var(--rich-gold);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.poodle-card p {
+    color: #bbb;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Dodajemo blagi sjaj ispod naslova sekcije */
+.poodle-features .section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: var(--rich-gold);
+    margin: 20px auto;
 }
     </style>
 </head>
@@ -1979,7 +2170,51 @@
         </div>
     </section>
 
+<section id="poodles" class="poodle-features py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center fade-in">
+                <h2 class="section-title gold-text">Zašto izabrati pudlu?</h2>
+                <p class="lead text-light">Pudle nisu samo psi za izložbe, one su najinteligentniji pratioci i savršeni članovi porodice.</p>
+            </div>
+        </div>
 
+        <div class="row g-4">
+            <!-- Inteligencija -->
+            <div class="col-md-4 fade-in">
+                <div class="poodle-card">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Visoka inteligencija</h3>
+                    <p>Pudle se rangiraju kao druga najpametnija rasa na svetu. Izuzetno brzo uče i uvek su spremne da udovolje vlasniku.</p>
+                </div>
+            </div>
+
+            <!-- Dlaka -->
+            <div class="col-md-4 fade-in">
+                <div class="poodle-card">
+                    <div class="card-icon">
+                        <i class="fas fa-sparkles"></i>
+                    </div>
+                    <h3>Hipoalergena dlaka</h3>
+                    <p>Savršen izbor za stan i ljude sa alergijama. Njihova dlaka se ne linja i nema onaj tipičan "miris psa".</p>
+                </div>
+            </div>
+
+            <!-- Karakter -->
+            <div class="col-md-4 fade-in">
+                <div class="poodle-card">
+                    <div class="card-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Veseo karakter</h3>
+                    <p>Izuzetno su društvene, vole decu i druge ljubimce. Pudla će se lako prilagoditi vašem životnom stilu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <section id="gallery" class="gallery-section">
         <div class="container">
