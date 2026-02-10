@@ -1688,6 +1688,159 @@
         .footer .row > div:nth-child(1) { animation-delay: 0.1s; }
         .footer .row > div:nth-child(2) { animation-delay: 0.2s; }
         .footer .row > div:nth-child(3) { animation-delay: 0.3s; }
+
+
+        /* Stilovi za galeriju kupaca */
+.customers-section {
+    background-color: #0a0a0a; /* Tamna pozadina kao ostatak sajta */
+    padding-bottom: 80px;
+}
+
+.customer-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--rich-gold);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.customer-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+}
+
+.customer-img-wrapper {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.customer-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.customer-card:hover .customer-img {
+    transform: scale(1.1);
+}
+
+.customer-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--rich-gold);
+}
+
+.customer-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.customer-name {
+    color: var(--rich-gold);
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.customer-location {
+    font-size: 0.85rem;
+    color: #bbb;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.customer-quote {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #eee;
+    line-height: 1.4;
+}
+
+/* Container za traku */
+.marquee-wrapper {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.marquee-content {
+    display: flex;
+    flex-shrink: 0;
+    gap: 20px;
+    min-width: 100%;
+    animation: scroll-left 30s linear infinite;
+}
+
+/* Pauza kad se pređe mišem */
+.marquee-wrapper:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+/* Stil slike u traci */
+.marquee-item {
+    position: relative;
+    width: 200px; /* Možeš povećati po želji */
+    height: 250px;
+    border: 1px solid var(--rich-gold);
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.marquee-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(30%);
+    transition: 0.3s;
+}
+
+.marquee-item:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+/* Mali bedž sa gradom */
+.marquee-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(212, 175, 55, 0.9); /* Gold boja */
+    color: black;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Animacija kretanja */
+@keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+/* Responzivnost */
+@media (max-width: 768px) {
+    .marquee-item {
+        width: 150px;
+        height: 200px;
+    }
+}
     </style>
 </head>
 
@@ -1830,9 +1983,9 @@
 
     <section id="gallery" class="gallery-section">
         <div class="container">
-            <h1 class="section-title gold-text fade-in">Naša galerija</h1>
+            <h1 class="section-title gold-text fade-in">Galerija</h1>
             <p class="text-center gold-text mb-5 fade-in">
-                Kratak pogled u svet odgajivačnice Amazing Creatures i naših zadovoljnih kupaca.
+                Kratak pogled u svet odgajivačnice Amazing Creatures.
             </p>
             <div class="row">
                 <!-- Slika 1 -->
@@ -1911,6 +2064,57 @@
             </div>
         </div>
     </section>
+
+<!-- Happy Owners Section -->
+<section id="happy-clients" class="py-5 overflow-hidden" style="background: #050505;">
+    <div class="container-fluid px-0">
+        <h2 class="section-title gold-text text-center mb-5 fade-in">Naši kupci širom sveta</h2>
+        
+        <!-- Prva traka (Smer: Levo) -->
+        <div class="marquee-wrapper">
+            <div class="marquee-content" id="marquee1">
+                <!-- Stavka 1 -->
+                <div class="marquee-item">
+                    <img src="assets/kupac1.jpg" alt="Zadovoljni kupac">
+                    <div class="marquee-badge">Beograd</div>
+                </div>
+                <!-- Stavka 2 -->
+                <div class="marquee-item">
+                    <img src="assets/kupac2.jpg" alt="Zadovoljni kupac">
+                    <div class="marquee-badge">Wien</div>
+                </div>
+                <!-- Stavka 3 -->
+                <div class="marquee-item">
+                    <img src="assets/kupac3.jpg" alt="Zadovoljni kupac">
+                    <div class="marquee-badge">Zurich</div>
+                </div>
+                <!-- Stavka 4 -->
+                <div class="marquee-item">
+                    <img src="assets/kupac4.jpg" alt="Zadovoljni kupac">
+                    <div class="marquee-badge">Novi Sad</div>
+                </div>
+                                <div class="marquee-item">
+                    <img src="assets/kupac5.jpg" alt="Zadovoljni kupac">
+                    <div class="marquee-badge">Novi Sad</div>
+                </div>
+                                <div class="marquee-item">
+                    <img src="assets/kupac6.jpg" alt="Zadovoljni kupac">
+                    <div class="marquee-badge">Novi Sad</div>
+                </div>
+                                <div class="marquee-item">
+                    <img src="assets/kupac7.jpg" alt="Zadovoljni kupac">
+                    <div class="marquee-badge">Novi Sad</div>
+                </div>
+                                <div class="marquee-item">
+                    <img src="assets/kupac8.jpg" alt="Zadovoljni kupac">
+                    <div class="marquee-badge">Novi Sad</div>
+                </div>
+                <!-- Ponovi stavke još jednom unutar istog diva zbog beskonačnog efekta (uradićemo to i preko JS-a) -->
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -2157,6 +2361,28 @@
                 modalCaption.textContent = galleryImages[currentImageIndex].alt;
             }
         }
+// Selektuj sve slike iz obe galerije
+const allGalleryImages = document.querySelectorAll('.gallery-img, .customer-img');
+
+allGalleryImages.forEach((img, index) => {
+    img.addEventListener('click', () => {
+        const modalImg = document.getElementById('modal-img');
+        const modal = document.getElementById('lightbox-modal');
+        
+        modal.style.display = "block";
+        modalImg.src = img.src;
+        // Ako želiš i caption:
+        document.getElementById('modal-caption').innerText = img.alt;
+    });
+});
+        
+document.addEventListener("DOMContentLoaded", function() {
+    const marquee = document.getElementById('marquee1');
+    
+    // Dupliramo sadržaj unutar trake da popunimo prazninu tokom animacije
+    const content = marquee.innerHTML;
+    marquee.innerHTML = content + content + content; // Tri puta je najsigurnije za velike ekrane
+});
     </script>
 </body>
 </html>
